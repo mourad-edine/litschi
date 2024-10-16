@@ -23,3 +23,6 @@ ajout de show_lastidcommande
 ******************
 
 ajout de suppression fait
+
+*********************************
+ajout de nouvelle base sans contrainte

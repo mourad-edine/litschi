@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : mer. 16 oct. 2024 à 18:52
+-- Généré le : mer. 16 oct. 2024 à 22:07
 -- Version du serveur : 10.4.32-MariaDB
 -- Version de PHP : 8.2.12
 
@@ -45,14 +45,13 @@ CREATE TABLE `commandes` (
 --
 
 INSERT INTO `commandes` (`id`, `evenement_id`, `fournisseur_id`, `quantite_commande`, `quantite_livre`, `etat`, `avance`, `date_commande`, `created_at`, `updated_at`) VALUES
-(2, NULL, 0, 18, NULL, 'envoyé', 200, '2024-10-16', '2024-10-16 05:12:27', '2024-10-16 05:12:27'),
-(3, NULL, 0, 20, 20, 'livré', 4000, '2024-10-16', '2024-10-16 05:13:01', '2024-10-16 05:30:04'),
 (4, NULL, 2, 40, 80, 'encours', 80000, '2024-10-16', '2024-10-16 12:03:43', '2024-10-16 12:09:07'),
 (5, NULL, 2, 40, NULL, 'envoyé', 80000, '2023-04-12', '2024-10-16 12:20:32', '2024-10-16 12:20:32'),
 (6, NULL, 3, 90, NULL, 'envoyé', 60000, '2023-04-12', '2024-10-16 12:21:44', '2024-10-16 12:21:44'),
 (7, NULL, 3, 120, 110, 'livré', 50000, '2023-04-12', '2024-10-16 12:22:39', '2024-10-16 12:42:18'),
 (8, NULL, 3, 9, NULL, 'envoyé', 9500, '2023-04-12', '2024-10-16 13:12:22', '2024-10-16 13:12:22'),
-(9, NULL, 3, 60, NULL, 'envoyé', 9500, '2023-04-12', '2024-10-16 13:14:15', '2024-10-16 13:14:15');
+(9, NULL, 3, 60, NULL, 'envoyé', 9500, '2023-04-12', '2024-10-16 13:14:15', '2024-10-16 13:14:15'),
+(10, NULL, 2, 30, NULL, 'envoyé', 58287, '2023-04-15', '2024-10-16 15:22:39', '2024-10-16 15:22:39');
 
 -- --------------------------------------------------------
 
@@ -139,14 +138,8 @@ CREATE TABLE `livraisons` (
 --
 
 INSERT INTO `livraisons` (`id`, `fournisseur_id`, `commande_id`, `sous_fournisseur_id`, `quantite`, `etat`, `created_at`, `updated_at`) VALUES
-(1, 1, 3, NULL, 10, 'non payé', '2024-10-16 05:14:25', '2024-10-16 05:14:25'),
-(2, 1, 3, NULL, 5, 'non payé', '2024-10-16 05:26:19', '2024-10-16 05:26:19'),
-(3, 1, 3, NULL, 5, 'non payé', '2024-10-16 05:27:21', '2024-10-16 05:27:21'),
-(4, 1, 3, NULL, 5, 'non payé', '2024-10-16 05:28:46', '2024-10-16 05:28:46'),
-(5, 1, 3, NULL, 0, 'non payé', '2024-10-16 05:30:04', '2024-10-16 05:30:04'),
 (6, 2, 4, NULL, 20, 'non payé', '2024-10-16 12:04:42', '2024-10-16 12:04:42'),
 (7, 2, 4, NULL, 20, 'non payé', '2024-10-16 12:05:17', '2024-10-16 12:05:17'),
-(8, 2, 4, NULL, 10, 'non payé', '2024-10-16 12:06:54', '2024-10-16 12:06:54'),
 (9, 2, 4, NULL, 10, 'non payé', '2024-10-16 12:07:34', '2024-10-16 12:07:34'),
 (10, 2, 4, NULL, 0, 'payé', '2024-10-16 12:08:05', '2024-10-16 13:50:09'),
 (11, 2, 4, NULL, 0, 'non payé', '2024-10-16 12:08:18', '2024-10-16 12:08:18'),
@@ -178,7 +171,6 @@ CREATE TABLE `payements` (
 --
 
 INSERT INTO `payements` (`id`, `livraison_id`, `montant`, `mode_payement`, `created_at`, `updated_at`) VALUES
-(1, 8, 1452, 'mvola', '2024-10-16 13:44:12', '2024-10-16 13:44:12'),
 (2, 10, 500, 'mvola', '2024-10-16 13:50:09', '2024-10-16 13:50:09');
 
 -- --------------------------------------------------------
@@ -267,6 +259,13 @@ CREATE TABLE `sous_fournisseurs` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Déchargement des données de la table `sous_fournisseurs`
+--
+
+INSERT INTO `sous_fournisseurs` (`id`, `fournisseur_id`, `nom_sous_fournisseur`, `adresse`, `contact`, `created_at`, `updated_at`) VALUES
+(2, 2, 'hugue', 'belgique', '0656168464', '2024-10-16 16:38:57', '2024-10-16 16:38:57');
+
 -- --------------------------------------------------------
 
 --
@@ -354,8 +353,8 @@ ALTER TABLE `fournisseurs`
 --
 ALTER TABLE `livraisons`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `livraisons_fournisseur_id_foreign` (`fournisseur_id`),
   ADD KEY `livraisons_commande_id_foreign` (`commande_id`),
+  ADD KEY `livraisons_fournisseur_id_foreign` (`fournisseur_id`),
   ADD KEY `livraisons_sous_fournisseur_id_foreign` (`sous_fournisseur_id`);
 
 --
@@ -399,7 +398,7 @@ ALTER TABLE `sessions`
 --
 ALTER TABLE `sous_fournisseurs`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `sous_fournisseurs_fournisseur_id_foreign` (`fournisseur_id`);
+  ADD KEY `fournisseur_id` (`fournisseur_id`);
 
 --
 -- Index pour la table `stocks`
@@ -432,7 +431,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT pour la table `commandes`
 --
 ALTER TABLE `commandes`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT pour la table `dechets`
@@ -492,7 +491,7 @@ ALTER TABLE `produit_finis`
 -- AUTO_INCREMENT pour la table `sous_fournisseurs`
 --
 ALTER TABLE `sous_fournisseurs`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT pour la table `stocks`
@@ -520,7 +519,7 @@ ALTER TABLE `users`
 -- Contraintes pour la table `commandes`
 --
 ALTER TABLE `commandes`
-  ADD CONSTRAINT `commandes_evenement_id_foreign` FOREIGN KEY (`evenement_id`) REFERENCES `evenements` (`id`);
+  ADD CONSTRAINT `commandes_evenement_id_foreign` FOREIGN KEY (`evenement_id`) REFERENCES `evenements` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Contraintes pour la table `factures`
@@ -532,15 +531,15 @@ ALTER TABLE `factures`
 -- Contraintes pour la table `livraisons`
 --
 ALTER TABLE `livraisons`
-  ADD CONSTRAINT `livraisons_commande_id_foreign` FOREIGN KEY (`commande_id`) REFERENCES `commandes` (`id`),
-  ADD CONSTRAINT `livraisons_fournisseur_id_foreign` FOREIGN KEY (`fournisseur_id`) REFERENCES `fournisseurs` (`id`),
-  ADD CONSTRAINT `livraisons_sous_fournisseur_id_foreign` FOREIGN KEY (`sous_fournisseur_id`) REFERENCES `sous_fournisseurs` (`id`);
+  ADD CONSTRAINT `livraisons_commande_id_foreign` FOREIGN KEY (`commande_id`) REFERENCES `commandes` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `livraisons_fournisseur_id_foreign` FOREIGN KEY (`fournisseur_id`) REFERENCES `fournisseurs` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `livraisons_sous_fournisseur_id_foreign` FOREIGN KEY (`sous_fournisseur_id`) REFERENCES `sous_fournisseurs` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Contraintes pour la table `payements`
 --
 ALTER TABLE `payements`
-  ADD CONSTRAINT `payements_livraison_id_foreign` FOREIGN KEY (`livraison_id`) REFERENCES `livraisons` (`id`);
+  ADD CONSTRAINT `payements_livraison_id_foreign` FOREIGN KEY (`livraison_id`) REFERENCES `livraisons` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Contraintes pour la table `produits`
@@ -552,7 +551,7 @@ ALTER TABLE `produits`
 -- Contraintes pour la table `sous_fournisseurs`
 --
 ALTER TABLE `sous_fournisseurs`
-  ADD CONSTRAINT `sous_fournisseurs_fournisseur_id_foreign` FOREIGN KEY (`fournisseur_id`) REFERENCES `fournisseurs` (`id`);
+  ADD CONSTRAINT `sous_fournisseurs_ibfk_1` FOREIGN KEY (`fournisseur_id`) REFERENCES `fournisseurs` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Contraintes pour la table `stocks`
