@@ -40,4 +40,13 @@ class PayementController extends Controller
         $test = Payement::findOrfail($id);
         return $test;
     }
+    public function deletePayement($id){
+        $valeur = Payement::findorfail($id);
+        if($valeur){
+            $valeur->delete();
+        }
+        return response()->json([
+            'message' => 'valeur supprimé avec succès'
+        ]);
+    }
 }

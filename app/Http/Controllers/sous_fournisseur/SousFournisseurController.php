@@ -13,7 +13,8 @@ class SousFournisseurController extends Controller
             $var = [
                 'fournisseur_id' => $request->fournisseur_id,
                 'nom_sous_fournisseur' => $request->nom_sous_fournisseur,
-                'adresse' => $request->adresse, 
+                'adresse' => $request->adresse,
+                'contact' => $request->contact
             ];
             $insert = SousFournisseur::firstOrCreate($var);
             return $insert;
@@ -29,5 +30,16 @@ class SousFournisseurController extends Controller
     public function detailSousFournisseur($id){
         $test = SousFournisseur::findOrfail($id);
         return $test;
+    }
+
+    public function deleteSousFournisseur($id){
+        $valeur = SousFournisseur::findorfail($id);
+        if($valeur){
+            $valeur->delete();
+            return response()->json([
+                'message' => 'valeur supprimé avec succès'
+            ]);
+        }
+        
     }
 }

@@ -31,4 +31,14 @@ class TraitementController extends Controller
         $test = Traiter::findOrfail($id);
         return $test;
     }
+
+    public function deleteTraitement($id){
+        $valeur = Traiter::findorfail($id);
+        if($valeur){
+            $valeur->delete();
+        }
+        return response()->json([
+            'message' => 'valeur supprimé avec succès'
+        ]);
+    }
 }

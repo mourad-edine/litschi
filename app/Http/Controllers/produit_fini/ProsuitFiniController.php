@@ -29,4 +29,14 @@ class ProsuitFiniController extends Controller
         $test = ProduitFini::findOrfail($id);
         return $test;
     }
+
+    public function deleteProduitFini($id){
+        $valeur = ProduitFini::findorfail($id);
+        if($valeur){
+            $valeur->delete();
+        }
+        return response()->json([
+            'message' => 'valeur supprimé avec succès'
+        ]);
+    }
 }

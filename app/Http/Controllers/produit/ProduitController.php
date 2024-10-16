@@ -32,4 +32,14 @@ class ProduitController extends Controller
         $test = Produit::findOrfail($id);
         return $test;
     }
+
+    public function deleteProduit($id){
+        $valeur = Produit::findorfail($id);
+        if($valeur){
+            $valeur->delete();
+        }
+        return response()->json([
+            'message' => 'valeur supprimé avec succès'
+        ]);
+    }
 }

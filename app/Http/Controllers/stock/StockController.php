@@ -30,4 +30,14 @@ class StockController extends Controller
         $test = Stock::findOrfail($id);
         return $test;
     }
+
+    public function deleteStock($id){
+        $valeur = Stock::findorfail($id);
+        if($valeur){
+            $valeur->delete();
+        }
+        return response()->json([
+            'message' => 'valeur supprimé avec succès'
+        ]);
+    }
 }

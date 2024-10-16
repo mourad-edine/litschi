@@ -41,6 +41,16 @@ class CommandeController extends Controller
         $lastItem = Commande::orderBy('id', 'desc')->first();
         return $lastItem;
     }
+
+    public function deleteCommande($id){
+        $valeur = Commande::findorfail($id);
+        if($valeur){
+            $valeur->delete();
+        }
+        return response()->json([
+            'message' => 'valeur supprimé avec succès'
+        ]);
+    }
 }
 
 

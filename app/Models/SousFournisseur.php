@@ -13,6 +13,7 @@ class SousFournisseur extends Model
         'fournisseur_id',
         'nom_sous_fournisseur',
         'adresse',
+        'contact'
     ];
 
     public function fournisseur()

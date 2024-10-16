@@ -18,3 +18,8 @@ commande avec valeur fournisseur : ok
 
 ***********************
 ajout de show_lastidcommande
+
+
+******************
+
+ajout de suppression fait

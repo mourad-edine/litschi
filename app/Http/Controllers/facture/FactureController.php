@@ -29,4 +29,13 @@ class FactureController extends Controller
         $test = Facture::findOrfail($id);
         return $test;
     }
+    public function deleteFacture($id){
+        $valeur = Facture::findorfail($id);
+        if($valeur){
+            $valeur->delete();
+        }
+        return response()->json([
+            'message' => 'valeur supprimé avec succès'
+        ]);
+    }
 }

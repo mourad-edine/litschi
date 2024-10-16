@@ -31,4 +31,14 @@ class FournisseurController extends Controller
         $test = Fourniseur::findOrfail($id);
         return $test;
     }
+
+    public function deleteFournisseur($id){
+        $valeur = Fourniseur::findorfail($id);
+        if($valeur){
+            $valeur->delete();
+        }
+        return response()->json([
+            'message' => 'valeur supprimé avec succès'
+        ]);
+    }
 }

@@ -29,4 +29,14 @@ class DechetController extends Controller
         $test = Dechet::findOrfail($id);
         return $test;
     }
+
+    public function deleteDechet($id){
+        $valeur = Dechet::findorfail($id);
+        if($valeur){
+            $valeur->delete();
+        }
+        return response()->json([
+            'message' => 'valeur supprimé avec succès'
+        ]);
+    }
 }

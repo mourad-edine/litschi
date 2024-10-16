@@ -54,5 +54,15 @@ class LivraisonController extends Controller
         return $test;
     }
 
+    public function deleteLivraison($id){
+        $valeur = Livraison::findorfail($id);
+        if($valeur){
+            $valeur->delete();
+        }
+        return response()->json([
+            'message' => 'valeur supprimé avec succès'
+        ]);
+    }
+
 
 }

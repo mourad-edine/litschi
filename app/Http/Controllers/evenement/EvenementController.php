@@ -30,5 +30,15 @@ class EvenementController extends Controller
         return $test;
     }
 
+    public function deleteEvent($id){
+        $valeur = Evenement::findorfail($id);
+        if($valeur){
+            $valeur->delete();
+        }
+        return response()->json([
+            'message' => 'valeur supprimé avec succès'
+        ]);
+    }
+
 
 }
