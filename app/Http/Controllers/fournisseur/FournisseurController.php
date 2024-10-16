@@ -13,7 +13,8 @@ class FournisseurController extends Controller
         if ($request) {
             $var = [
                 'nom_fournisseur' => $request->nom_fournisseur,
-                'adresse' => $request->adresse, 
+                'adresse' => $request->adresse,
+                'contact' => $request->contact
             ];
             $insert = Fourniseur::firstOrCreate($var);
             return $insert;

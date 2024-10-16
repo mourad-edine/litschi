@@ -11,18 +11,18 @@ class CommandeController extends Controller
     public function store_commande(Request $request)
     {
         if ($request) {
-            $test = new Commande();
             $var = [
+                'fournisseur_id' => $request->fournisseur_id,
                 'evenement_id' => $request->evenement_id,
                 'quantite_commande' => $request->quantite,
                 'etat' => "envoyé",
-                'avance' => $request->avance
+                'avance' => $request->avance,
+                'date_commande' => $request->date
                 //etat ,id_commande
             ];
             $insert = Commande::create($var);
             return [
                 "insert" => $insert,
-                "tous" => $test->getCommande()
             ];
         }
     }

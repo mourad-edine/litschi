@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : mer. 16 oct. 2024 à 17:46
+-- Généré le : mer. 16 oct. 2024 à 10:18
 -- Version du serveur : 10.4.32-MariaDB
 -- Version de PHP : 8.2.12
 
@@ -24,6 +24,30 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `cache`
+--
+
+CREATE TABLE `cache` (
+  `key` varchar(255) NOT NULL,
+  `value` mediumtext NOT NULL,
+  `expiration` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `cache_locks`
+--
+
+CREATE TABLE `cache_locks` (
+  `key` varchar(255) NOT NULL,
+  `owner` varchar(255) NOT NULL,
+  `expiration` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `commandes`
 --
 
@@ -35,7 +59,6 @@ CREATE TABLE `commandes` (
   `quantite_livre` int(3) DEFAULT NULL,
   `etat` varchar(20) NOT NULL,
   `avance` int(10) DEFAULT NULL,
-  `date_commande` date NOT NULL DEFAULT current_timestamp(),
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -44,13 +67,9 @@ CREATE TABLE `commandes` (
 -- Déchargement des données de la table `commandes`
 --
 
-INSERT INTO `commandes` (`id`, `evenement_id`, `fournisseur_id`, `quantite_commande`, `quantite_livre`, `etat`, `avance`, `date_commande`, `created_at`, `updated_at`) VALUES
-(2, NULL, 0, 18, NULL, 'envoyé', 200, '2024-10-16', '2024-10-16 05:12:27', '2024-10-16 05:12:27'),
-(3, NULL, 0, 20, 20, 'livré', 4000, '2024-10-16', '2024-10-16 05:13:01', '2024-10-16 05:30:04'),
-(4, NULL, 2, 40, 80, 'encours', 80000, '2024-10-16', '2024-10-16 12:03:43', '2024-10-16 12:09:07'),
-(5, NULL, 2, 40, NULL, 'envoyé', 80000, '2023-04-12', '2024-10-16 12:20:32', '2024-10-16 12:20:32'),
-(6, NULL, 3, 90, NULL, 'envoyé', 60000, '2023-04-12', '2024-10-16 12:21:44', '2024-10-16 12:21:44'),
-(7, NULL, 3, 120, 110, 'livré', 50000, '2023-04-12', '2024-10-16 12:22:39', '2024-10-16 12:42:18');
+INSERT INTO `commandes` (`id`, `evenement_id`, `fournisseur_id`, `quantite_commande`, `quantite_livre`, `etat`, `avance`, `created_at`, `updated_at`) VALUES
+(2, NULL, 0, 18, NULL, 'livré', 200, '2024-10-16 05:12:27', '2024-10-16 05:12:27'),
+(3, NULL, 0, 20, 10, 'encours', 4000, '2024-10-16 05:13:01', '2024-10-16 05:14:25');
 
 -- --------------------------------------------------------
 
@@ -94,6 +113,22 @@ CREATE TABLE `factures` (
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `failed_jobs`
+--
+
+CREATE TABLE `failed_jobs` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `uuid` varchar(255) NOT NULL,
+  `connection` text NOT NULL,
+  `queue` text NOT NULL,
+  `payload` longtext NOT NULL,
+  `exception` longtext NOT NULL,
+  `failed_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `fournisseurs`
 --
 
@@ -111,9 +146,42 @@ CREATE TABLE `fournisseurs` (
 --
 
 INSERT INTO `fournisseurs` (`id`, `nom_fournisseur`, `adresse`, `contact`, `created_at`, `updated_at`) VALUES
-(1, 'jean', 'madagascar', '', '2024-10-15 02:48:07', '2024-10-15 02:48:07'),
-(2, 'jerobne', 'paris', '0321354685', '2024-10-16 12:01:00', '2024-10-16 12:01:00'),
-(3, 'SEb', 'maric', '0321354685', '2024-10-16 12:21:30', '2024-10-16 12:21:30');
+(1, 'jean', 'madagascar', '', '2024-10-15 02:48:07', '2024-10-15 02:48:07');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `jobs`
+--
+
+CREATE TABLE `jobs` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `queue` varchar(255) NOT NULL,
+  `payload` longtext NOT NULL,
+  `attempts` tinyint(3) UNSIGNED NOT NULL,
+  `reserved_at` int(10) UNSIGNED DEFAULT NULL,
+  `available_at` int(10) UNSIGNED NOT NULL,
+  `created_at` int(10) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `job_batches`
+--
+
+CREATE TABLE `job_batches` (
+  `id` varchar(255) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `total_jobs` int(11) NOT NULL,
+  `pending_jobs` int(11) NOT NULL,
+  `failed_jobs` int(11) NOT NULL,
+  `failed_job_ids` longtext NOT NULL,
+  `options` mediumtext DEFAULT NULL,
+  `cancelled_at` int(11) DEFAULT NULL,
+  `created_at` int(11) NOT NULL,
+  `finished_at` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -136,24 +204,54 @@ CREATE TABLE `livraisons` (
 --
 
 INSERT INTO `livraisons` (`id`, `fournisseur_id`, `commande_id`, `sous_fournisseur_id`, `quantite`, `created_at`, `updated_at`) VALUES
-(1, 1, 3, NULL, 10, '2024-10-16 05:14:25', '2024-10-16 05:14:25'),
-(2, 1, 3, NULL, 5, '2024-10-16 05:26:19', '2024-10-16 05:26:19'),
-(3, 1, 3, NULL, 5, '2024-10-16 05:27:21', '2024-10-16 05:27:21'),
-(4, 1, 3, NULL, 5, '2024-10-16 05:28:46', '2024-10-16 05:28:46'),
-(5, 1, 3, NULL, 0, '2024-10-16 05:30:04', '2024-10-16 05:30:04'),
-(6, 2, 4, NULL, 20, '2024-10-16 12:04:42', '2024-10-16 12:04:42'),
-(7, 2, 4, NULL, 20, '2024-10-16 12:05:17', '2024-10-16 12:05:17'),
-(8, 2, 4, NULL, 10, '2024-10-16 12:06:54', '2024-10-16 12:06:54'),
-(9, 2, 4, NULL, 10, '2024-10-16 12:07:34', '2024-10-16 12:07:34'),
-(10, 2, 4, NULL, 0, '2024-10-16 12:08:05', '2024-10-16 12:08:05'),
-(11, 2, 4, NULL, 0, '2024-10-16 12:08:18', '2024-10-16 12:08:18'),
-(12, 2, 4, NULL, 40, '2024-10-16 12:08:29', '2024-10-16 12:08:29'),
-(13, 2, 4, NULL, 10, '2024-10-16 12:09:07', '2024-10-16 12:09:07'),
-(14, 3, 7, NULL, 40, '2024-10-16 12:39:30', '2024-10-16 12:39:30'),
-(15, 3, 7, NULL, 50, '2024-10-16 12:39:52', '2024-10-16 12:39:52'),
-(16, 3, 7, NULL, 20, '2024-10-16 12:41:36', '2024-10-16 12:41:36'),
-(17, 3, 7, NULL, 20, '2024-10-16 12:41:57', '2024-10-16 12:41:57'),
-(18, 3, 7, NULL, 10, '2024-10-16 12:42:18', '2024-10-16 12:42:18');
+(1, 1, 3, NULL, 10, '2024-10-16 05:14:25', '2024-10-16 05:14:25');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `migrations`
+--
+
+CREATE TABLE `migrations` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `migration` varchar(255) NOT NULL,
+  `batch` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Déchargement des données de la table `migrations`
+--
+
+INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
+(1, '0001_01_01_000000_create_users_table', 1),
+(2, '0001_01_01_000001_create_cache_table', 1),
+(3, '0001_01_01_000002_create_jobs_table', 1),
+(4, '2024_10_12_184657_create_personal_access_tokens_table', 1),
+(5, '2024_10_12_195546_create_photos_table', 1),
+(6, '2024_10_13_165826_create_evenements_table', 1),
+(7, '2024_10_13_165827_create_fourniseurs_table', 1),
+(8, '2024_10_13_165852_create_commandes_table', 1),
+(9, '2024_10_13_165853_create_sous_fournisseurs_table', 1),
+(10, '2024_10_13_165926_create_livraisons_table', 1),
+(11, '2024_10_13_170015_create_factures_table', 1),
+(12, '2024_10_13_170041_create_stocks_table', 1),
+(13, '2024_10_13_170105_create_dechets_table', 1),
+(14, '2024_10_13_170133_create_produit_finis_table', 1),
+(15, '2024_10_13_170529_create_produits_table', 1),
+(16, '2024_10_13_170600_create_traiters_table', 1),
+(17, '2024_10_15_081558_create_payements_table', 2);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `password_reset_tokens`
+--
+
+CREATE TABLE `password_reset_tokens` (
+  `email` varchar(255) NOT NULL,
+  `token` varchar(255) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -187,6 +285,18 @@ CREATE TABLE `personal_access_tokens` (
   `expires_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `photos`
+--
+
+CREATE TABLE `photos` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `user_id` bigint(20) UNSIGNED NOT NULL,
+  `nom_photo` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -232,13 +342,6 @@ CREATE TABLE `sessions` (
   `payload` longtext NOT NULL,
   `last_activity` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Déchargement des données de la table `sessions`
---
-
-INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('fcdoSJsN6L7yumQlrqdgGX8q6hsddZIJyzgw8AD2', NULL, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoibnFmbjlSRVo5c0t5alhkSjc0OEdoUk9DdEFaeTF3RVhITFhveGF5MiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mjc6Imh0dHA6Ly9sb2NhbGhvc3QvY29kL3B1YmxpYyI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1729069646);
 
 -- --------------------------------------------------------
 
@@ -307,6 +410,18 @@ CREATE TABLE `users` (
 --
 
 --
+-- Index pour la table `cache`
+--
+ALTER TABLE `cache`
+  ADD PRIMARY KEY (`key`);
+
+--
+-- Index pour la table `cache_locks`
+--
+ALTER TABLE `cache_locks`
+  ADD PRIMARY KEY (`key`);
+
+--
 -- Index pour la table `commandes`
 --
 ALTER TABLE `commandes`
@@ -333,9 +448,29 @@ ALTER TABLE `factures`
   ADD KEY `factures_livraison_id_foreign` (`livraison_id`);
 
 --
+-- Index pour la table `failed_jobs`
+--
+ALTER TABLE `failed_jobs`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`);
+
+--
 -- Index pour la table `fournisseurs`
 --
 ALTER TABLE `fournisseurs`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `jobs`
+--
+ALTER TABLE `jobs`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `jobs_queue_index` (`queue`);
+
+--
+-- Index pour la table `job_batches`
+--
+ALTER TABLE `job_batches`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -346,6 +481,18 @@ ALTER TABLE `livraisons`
   ADD KEY `livraisons_fournisseur_id_foreign` (`fournisseur_id`),
   ADD KEY `livraisons_commande_id_foreign` (`commande_id`),
   ADD KEY `livraisons_sous_fournisseur_id_foreign` (`sous_fournisseur_id`);
+
+--
+-- Index pour la table `migrations`
+--
+ALTER TABLE `migrations`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `password_reset_tokens`
+--
+ALTER TABLE `password_reset_tokens`
+  ADD PRIMARY KEY (`email`);
 
 --
 -- Index pour la table `payements`
@@ -361,6 +508,13 @@ ALTER TABLE `personal_access_tokens`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `personal_access_tokens_token_unique` (`token`),
   ADD KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`);
+
+--
+-- Index pour la table `photos`
+--
+ALTER TABLE `photos`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `photos_user_id_foreign` (`user_id`);
 
 --
 -- Index pour la table `produits`
@@ -421,7 +575,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT pour la table `commandes`
 --
 ALTER TABLE `commandes`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT pour la table `dechets`
@@ -442,16 +596,34 @@ ALTER TABLE `factures`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT pour la table `failed_jobs`
+--
+ALTER TABLE `failed_jobs`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT pour la table `fournisseurs`
 --
 ALTER TABLE `fournisseurs`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT pour la table `jobs`
+--
+ALTER TABLE `jobs`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT pour la table `livraisons`
 --
 ALTER TABLE `livraisons`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT pour la table `migrations`
+--
+ALTER TABLE `migrations`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT pour la table `payements`
@@ -463,6 +635,12 @@ ALTER TABLE `payements`
 -- AUTO_INCREMENT pour la table `personal_access_tokens`
 --
 ALTER TABLE `personal_access_tokens`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table `photos`
+--
+ALTER TABLE `photos`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
@@ -530,6 +708,12 @@ ALTER TABLE `livraisons`
 --
 ALTER TABLE `payements`
   ADD CONSTRAINT `payements_livraison_id_foreign` FOREIGN KEY (`livraison_id`) REFERENCES `livraisons` (`id`);
+
+--
+-- Contraintes pour la table `photos`
+--
+ALTER TABLE `photos`
+  ADD CONSTRAINT `photos_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 --
 -- Contraintes pour la table `produits`

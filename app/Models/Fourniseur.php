@@ -11,6 +11,7 @@ class Fourniseur extends Model
     protected $fillable = [
         'nom_fournisseur',
         'adresse',
+        'contact'
     ];
     use HasFactory;
 

@@ -10,11 +10,13 @@ class Commande extends Model
 
     protected $table = "commandes";
     protected $fillable = [
+        'fournisseur_id',
         'evenement_id',
         'quantite_livre',
         'quantite_commande',
         'etat',
         'avance',
+        'date_commande'
     ];
     use HasFactory;
 
@@ -36,10 +38,8 @@ class Commande extends Model
         return Commande::all();
     }
 
-
-
-
-
+    
+    
 
     
 }

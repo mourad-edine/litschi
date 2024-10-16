@@ -15,13 +15,18 @@ class LivraisonController extends Controller
             $var = [
                 'commande_id' => $request->commande_id,
                 'fournisseur_id' => $request->fournisseur_id,
-                'quantite' => $request->quantite
+                'quantite' => $request->quantite,
             ];
             $livraison = Livraison::create($var);
 
             $commande = Commande::findOrFail($request->commande_id);
             if($commande){
-                if($commande->quantite_commande == $commande->quantite_livre + $livraison->quantite){
+                if($commande->quantite_commande < $commande->quantite_livre + $livraison->quantite){
+                    return response()->json([
+                        'message' => 'vous avez entré un grand nombre'
+                    ]);
+                }
+                else if($commande->quantite_commande == $commande->quantite_livre + $livraison->quantite){
                     $commande->etat = "livré";
                 }
                 else{
