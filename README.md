@@ -13,3 +13,8 @@ namorona koa zah dossier "archive DB" de ao daoly le ancien DB , le recent DB ex
 
 livraison avec valeur fournisseur: ok
 commande avec valeur fournisseur : ok
+
+
+
+***********************
+ajout de show_lastidcommande

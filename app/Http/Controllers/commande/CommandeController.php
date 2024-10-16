@@ -37,6 +37,10 @@ class CommandeController extends Controller
         $test = Commande::findOrfail($id);
         return $test;
     }
+    public function Show_lastIdCommande(){
+        $lastItem = Commande::orderBy('id', 'desc')->first();
+        return $lastItem;
+    }
 }
 
 

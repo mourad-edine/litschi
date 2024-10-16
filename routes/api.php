@@ -24,7 +24,7 @@ Route::get('/reception',[ApiController::class , 'index'])->name('accueil');
 Route::post('/storer',[ApiController::class , 'store'])->name('store.name');
 Route::get('/details/{id}',[ApiController::class , 'detail'])->name('detail.user');
 
-//nouveau controller
+/**********************creation****************** */
 
 
 Route::post('/create_livraison',[LivraisonController::class , 'store_livraison'])->name('store.livraison');
@@ -42,6 +42,8 @@ Route::post('/create_dechet',[DechetController::class , 'store_dechet'])->name('
 Route::post('/create_produit_fini',[ProsuitFiniController::class , 'store_produit_fini'])->name('store.livraison');
 //
 
+
+/**********************affichage********************** */
 Route::get('/show_evenement',[EvenementController::class , 'showEvenement'])->name('show.event');
 Route::get('/show_commande',[CommandeController::class , 'showCommande'])->name('show.commande');
 Route::get('/show_fournisseur',[FournisseurController::class , 'showFournisseur'])->name('show.fournisseur');
@@ -53,8 +55,9 @@ Route::get('/show_produit_fini',[ProsuitFiniController::class , 'showProduitFini
 Route::get('/show_Livraison',[LivraisonController::class , 'showLivraison'])->name('show.livraison');
 Route::get('/show_payement',[PayementController::class , 'showPayement'])->name('show.payement');
 
+Route::get('/Show_lastIdCommande',[CommandeController::class , 'Show_lastIdCommande'])->name('show.lastId');
 
-//detail
+//****************************detail*******************************/
 
 Route::get('/details_commande/{id}',[CommandeController::class , 'detailCommande'])->name('detail.commande');
 Route::get('/details_livraison/{id}',[LivraisonController::class , 'detailLivraison'])->name('detail.livraison');
@@ -66,3 +69,18 @@ Route::get('/details_dechet/{id}',[DechetController::class , 'detailDechet'])->n
 Route::get('/details_produit_fini/{id}',[ProsuitFiniController::class , 'detailProduitFini'])->name('detail.produit_fini');
 Route::get('/details_traitement/{id}',[TraitementController::class , 'detailTraitement'])->name('detail.traitement');
 Route::get('/details_payement/{id}',[PayementController::class , 'detailPayement'])->name('detail.payement');
+
+
+/*******suppression********************* */
+
+Route::get('/delete_commande/{id}',[CommandeController::class , 'deleteCommande'])->name('detail.commande');
+Route::get('/delete_livraison/{id}',[LivraisonController::class , 'deleteLivraison'])->name('detail.livraison');
+Route::get('/delete_fournisseur/{id}',[FournisseurController::class , 'deletefournisseur'])->name('detail.fournisseur');
+Route::get('/delete_sous_fournisseur/{id}',[SousFournisseurController::class , 'deleteSousFournisseur'])->name('detail.sous_fournisseur');
+Route::get('/delete_evenement/{id}',[EvenementController::class , 'deleteEvent'])->name('detail.event');
+Route::get('/delete_stock/{id}',[StockController::class , 'deleteStock'])->name('detail.Stock');
+Route::get('/delete_dechet/{id}',[DechetController::class , 'deleteDechet'])->name('detail.dechet');
+Route::get('/delete_produit_fini/{id}',[ProsuitFiniController::class , 'deleteProduitFini'])->name('detail.produit_fini');
+Route::get('/delete_traitement/{id}',[TraitementController::class , 'deleteTraitement'])->name('detail.traitement');
+Route::get('/delete_payement/{id}',[PayementController::class , 'deletePayement'])->name('detail.payement');
+
