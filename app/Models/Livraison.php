@@ -32,7 +32,7 @@ class Livraison extends Model
     }
 
     public function getLivraison(){
-        return Livraison::all();
+        return Livraison::with('fournisseur')->get();
     }
 
 }

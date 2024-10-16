@@ -9,6 +9,7 @@ use App\Http\Controllers\evenement\EvenementController;
 use App\Http\Controllers\facture\FactureController;
 use App\Http\Controllers\fournisseur\FournisseurController;
 use App\Http\Controllers\livraison\LivraisonController;
+use App\Http\Controllers\payement\PayementController;
 use App\Http\Controllers\produit\ProduitController;
 use App\Http\Controllers\produit_fini\ProsuitFiniController;
 use App\Http\Controllers\sous_fournisseur\SousFournisseurController;
@@ -31,6 +32,7 @@ Route::post('/create_commande',[CommandeController::class , 'store_commande'])->
 Route::post('/create_fournisseur',[FournisseurController::class , 'store_fournisseur'])->name('store.fournisseur');
 Route::post('/create_evenement',[EvenementController::class , 'store_evenement'])->name('store.event');
 Route::post('/create_produit',[ProduitController::class , 'store_produit'])->name('store.produit');
+Route::post('/create_payement',[PayementController::class , 'store_payement'])->name('store.payement');
 
 Route::post('/create_sous_fournisseur',[SousFournisseurController::class , 'store_sous_fournisseur'])->name('store.sous_fournisseur');
 Route::post('/create_facture',[FactureController::class , 'store_facture'])->name('store.facture');
@@ -49,6 +51,7 @@ Route::get('/show_stock',[StockController::class , 'showStock'])->name('show.sto
 Route::get('/show_dechet',[DechetController::class , 'showDechet'])->name('show.dechet');
 Route::get('/show_produit_fini',[ProsuitFiniController::class , 'showProduitFini'])->name('show.produit_fini');
 Route::get('/show_Livraison',[LivraisonController::class , 'showLivraison'])->name('show.livraison');
+Route::get('/show_payement',[PayementController::class , 'showPayement'])->name('show.payement');
 
 
 //detail
@@ -62,3 +65,4 @@ Route::get('/details_stock/{id}',[StockController::class , 'detailStock'])->name
 Route::get('/details_dechet/{id}',[DechetController::class , 'detailDechet'])->name('detail.dechet');
 Route::get('/details_produit_fini/{id}',[ProsuitFiniController::class , 'detailProduitFini'])->name('detail.produit_fini');
 Route::get('/details_traitement/{id}',[TraitementController::class , 'detailTraitement'])->name('detail.traitement');
+Route::get('/details_payement/{id}',[PayementController::class , 'detailPayement'])->name('detail.payement');

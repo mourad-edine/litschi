@@ -14,4 +14,9 @@ class Payement extends Model
         'mode_payement'
     ];
     use HasFactory;
+
+
+    public function getPayement(){
+        return Payement::all();
+    }
 }

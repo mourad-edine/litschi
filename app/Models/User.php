@@ -50,6 +50,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(Photo::class);
     }
+    public function commandes()
+    {
+        return $this->hasMany(Commande::class);
+    }
 
     public function getUser(){
         return User::all();

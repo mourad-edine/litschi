@@ -24,22 +24,17 @@ class Commande extends Model
     {
         return $this->belongsTo(Evenement::class);
     }
-    public function fournisseurs()
+    public function fournisseur()
     {
-        return $this->belongsToMany(Fourniseur::class);
+        return $this->belongsTo(Fourniseur::class);
     }
 
     public function sous_fournisseurs()
     {
-        return $this->belongsToMany(SousFournisseur::class);
+        return $this->belongsTo(SousFournisseur::class);
     }
-
     public function getCommande(){
-        return Commande::all();
+        return Commande::with('fournisseur')->get();
     }
-
-    
-    
-
     
 }

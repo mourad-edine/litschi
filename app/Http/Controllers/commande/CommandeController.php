@@ -10,6 +10,7 @@ class CommandeController extends Controller
 {
     public function store_commande(Request $request)
     {
+        $test = new Commande();
         if ($request) {
             $var = [
                 'fournisseur_id' => $request->fournisseur_id,
@@ -23,6 +24,7 @@ class CommandeController extends Controller
             $insert = Commande::create($var);
             return [
                 "insert" => $insert,
+                "information" => $test->getCommande(),
             ];
         }
     }
