@@ -34,7 +34,11 @@ class Commande extends Model
         return $this->belongsTo(SousFournisseur::class);
     }
     public function getCommande(){
-        return Commande::whereNotIn('etat', ['annulé'])->get();
+        return Commande::whereNotIn('etat', ['annulé','livré'])->get();
+    }
+
+    public function getCommandeLivre(){
+        return Commande::where('etat', ['livré'])->get();
     }
 
     public function getCommandeAnnule(){

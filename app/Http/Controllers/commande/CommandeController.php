@@ -33,6 +33,11 @@ class CommandeController extends Controller
         $test = new Commande();
         return $test->getCommande();
     }
+
+    public function showCommandeLivre(){
+        $test = new Commande();
+        return $test->getCommandeLivre();
+    }
 ///toutes les commandes annulé
     public function showCommandeAnnule(){
         $test = new Commande();
