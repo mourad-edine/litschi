@@ -37,8 +37,8 @@ class Commande extends Model
         return Commande::whereNotIn('etat', ['annulé','livré'])->get();
     }
 
-    public function getCommandeLivre(){
-        return Commande::where('etat', ['livré'])->get();
+    public function getCommandeNoLivre(){
+        return Commande::wherenotin('etat', ['livré'])->get();
     }
 
     public function getCommandeAnnule(){

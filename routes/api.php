@@ -47,7 +47,7 @@ Route::post('/create_produit_fini',[ProsuitFiniController::class , 'store_produi
 Route::get('/show_evenement',[EvenementController::class , 'showEvenement'])->name('show.event');
 Route::get('/show_commande',[CommandeController::class , 'showCommande'])->name('show.commande');
 Route::get('/show_commande_annule',[CommandeController::class , 'showCommandeAnnule'])->name('show.commandeannule');
-Route::get('/show_commande_livre',[CommandeController::class , 'showCommandeLivre'])->name('show.commandelivre');
+Route::get('/show_commande_non_livre',[CommandeController::class , 'showCommandeNoLivre'])->name('show.commandenolivre');
 
 Route::get('/show_fournisseur',[FournisseurController::class , 'showFournisseur'])->name('show.fournisseur');
 Route::get('/show_sous_fournisseur',[SousFournisseurController::class , 'showSousFournisseur'])->name('show.sous_fournisseur');

@@ -34,9 +34,9 @@ class CommandeController extends Controller
         return $test->getCommande();
     }
 
-    public function showCommandeLivre(){
+    public function showCommandeNoLivre(){
         $test = new Commande();
-        return $test->getCommandeLivre();
+        return $test->getCommandeNoLivre();
     }
 ///toutes les commandes annulé
     public function showCommandeAnnule(){
