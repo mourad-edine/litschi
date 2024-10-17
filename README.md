@@ -35,3 +35,13 @@ http://localhost/cod/public/api/show_livraisonPaid
 http://localhost/cod/public/api/show_livraisonUnpaid
 
 mettre date de payement : ok
+
+
+*********************************
+***pour annuler la commande voici le lien
+
+http://localhost/cod/public/api/annuler_commande/{id}
+
+***pour recevoir les commandes annulé
+
+http://localhost/cod/public/api/show_commande_annule

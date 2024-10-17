@@ -28,9 +28,15 @@ class CommandeController extends Controller
             ];
         }
     }
+    ///commande encoours ou envoyé
     public function showCommande(){
         $test = new Commande();
         return $test->getCommande();
+    }
+///toutes les commandes annulé
+    public function showCommandeAnnule(){
+        $test = new Commande();
+        return $test->getCommandeAnnule();
     }
     
     public function detailCommande($id){
@@ -49,6 +55,17 @@ class CommandeController extends Controller
         }
         return response()->json([
             'message' => 'valeur supprimé avec succès'
+        ]);
+    }
+
+    public function AnnulerCommande($id){
+        $valeur = Commande::findorfail($id);
+        if($valeur){
+            $valeur->etat = "annulé";
+            $valeur->save();
+        }
+        return response()->json([
+            'message' => 'commande annulé avec succes'
         ]);
     }
 }
