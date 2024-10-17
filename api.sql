@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : jeu. 17 oct. 2024 à 15:35
+-- Généré le : jeu. 17 oct. 2024 à 15:57
 -- Version du serveur : 10.4.32-MariaDB
 -- Version de PHP : 8.2.12
 
@@ -130,6 +130,7 @@ CREATE TABLE `livraisons` (
   `quantite` int(11) NOT NULL,
   `nombre_caissette` int(7) NOT NULL,
   `etat` varchar(8) NOT NULL DEFAULT 'non payé',
+  `date_livraison` date DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -138,20 +139,20 @@ CREATE TABLE `livraisons` (
 -- Déchargement des données de la table `livraisons`
 --
 
-INSERT INTO `livraisons` (`id`, `fournisseur_id`, `commande_id`, `sous_fournisseur_id`, `quantite`, `nombre_caissette`, `etat`, `created_at`, `updated_at`) VALUES
-(6, 2, 4, NULL, 20, 0, 'non payé', '2024-10-16 12:04:42', '2024-10-16 12:04:42'),
-(7, 2, 4, NULL, 20, 0, 'non payé', '2024-10-16 12:05:17', '2024-10-16 12:05:17'),
-(9, 2, 4, NULL, 10, 0, 'payé', '2024-10-16 12:07:34', '2024-10-17 09:46:57'),
-(10, 2, 4, NULL, 0, 0, 'payé', '2024-10-16 12:08:05', '2024-10-16 13:50:09'),
-(11, 2, 4, NULL, 0, 0, 'non payé', '2024-10-16 12:08:18', '2024-10-16 12:08:18'),
-(12, 2, 4, NULL, 40, 0, 'non payé', '2024-10-16 12:08:29', '2024-10-16 12:08:29'),
-(13, 2, 4, NULL, 10, 0, 'non payé', '2024-10-16 12:09:07', '2024-10-16 12:09:07'),
-(14, 3, 7, NULL, 40, 0, 'non payé', '2024-10-16 12:39:30', '2024-10-16 12:39:30'),
-(15, 3, 7, NULL, 50, 0, 'payé', '2024-10-16 12:39:52', '2024-10-17 09:47:50'),
-(16, 3, 7, NULL, 20, 0, 'non payé', '2024-10-16 12:41:36', '2024-10-16 12:41:36'),
-(17, 3, 7, NULL, 20, 0, 'non payé', '2024-10-16 12:41:57', '2024-10-16 12:41:57'),
-(18, 3, 7, NULL, 10, 0, 'non payé', '2024-10-16 12:42:18', '2024-10-16 12:42:18'),
-(19, 2, 8, NULL, 20, 180, 'non payé', '2024-10-17 10:33:20', '2024-10-17 10:33:20');
+INSERT INTO `livraisons` (`id`, `fournisseur_id`, `commande_id`, `sous_fournisseur_id`, `quantite`, `nombre_caissette`, `etat`, `date_livraison`, `created_at`, `updated_at`) VALUES
+(6, 2, 4, NULL, 20, 0, 'non payé', NULL, '2024-10-16 12:04:42', '2024-10-16 12:04:42'),
+(7, 2, 4, NULL, 20, 0, 'non payé', NULL, '2024-10-16 12:05:17', '2024-10-16 12:05:17'),
+(9, 2, 4, NULL, 10, 0, 'payé', NULL, '2024-10-16 12:07:34', '2024-10-17 09:46:57'),
+(10, 2, 4, NULL, 0, 0, 'payé', NULL, '2024-10-16 12:08:05', '2024-10-16 13:50:09'),
+(11, 2, 4, NULL, 0, 0, 'non payé', NULL, '2024-10-16 12:08:18', '2024-10-16 12:08:18'),
+(12, 2, 4, NULL, 40, 0, 'non payé', NULL, '2024-10-16 12:08:29', '2024-10-16 12:08:29'),
+(13, 2, 4, NULL, 10, 0, 'non payé', NULL, '2024-10-16 12:09:07', '2024-10-16 12:09:07'),
+(14, 3, 7, NULL, 40, 0, 'non payé', NULL, '2024-10-16 12:39:30', '2024-10-16 12:39:30'),
+(15, 3, 7, NULL, 50, 0, 'payé', NULL, '2024-10-16 12:39:52', '2024-10-17 09:47:50'),
+(16, 3, 7, NULL, 20, 0, 'non payé', NULL, '2024-10-16 12:41:36', '2024-10-16 12:41:36'),
+(17, 3, 7, NULL, 20, 0, 'non payé', NULL, '2024-10-16 12:41:57', '2024-10-16 12:41:57'),
+(18, 3, 7, NULL, 10, 0, 'non payé', NULL, '2024-10-16 12:42:18', '2024-10-16 12:42:18'),
+(19, 2, 8, NULL, 20, 180, 'non payé', NULL, '2024-10-17 10:33:20', '2024-10-17 10:33:20');
 
 -- --------------------------------------------------------
 

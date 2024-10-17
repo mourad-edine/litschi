@@ -13,7 +13,8 @@ class Livraison extends Model
         'sous_fournisseur_id',
         'commande_id',
         'quantite',
-        'nombre_caissette'
+        'nombre_caissette',
+        'date_livraison'
     ];
     use HasFactory;
 
