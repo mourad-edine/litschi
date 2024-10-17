@@ -45,3 +45,8 @@ http://localhost/cod/public/api/annuler_commande/{id}
 ***pour recevoir les commandes annulé
 
 http://localhost/cod/public/api/show_commande_annule
+
+********************************
+
+
+ajout "nombre_caissette" au attributs de livraisons
