@@ -11,7 +11,8 @@ class Payement extends Model
     protected $fillable = [
         'livraison_id',
         'montant',
-        'mode_payement'
+        'mode_payement',
+        'date_payement'
     ];
     use HasFactory;
 

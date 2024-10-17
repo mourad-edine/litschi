@@ -64,5 +64,15 @@ class LivraisonController extends Controller
         ]);
     }
 
+    public function getPaid(){
+        $valeur = Livraison::where('etat','payé')->get();
+        return $valeur;
+    }
+
+    public function getUnpaid(){
+        $valeur = Livraison::where('etat','non payé')->get();
+        return $valeur;
+    }
+
 
 }

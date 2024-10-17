@@ -53,6 +53,9 @@ Route::get('/show_stock',[StockController::class , 'showStock'])->name('show.sto
 Route::get('/show_dechet',[DechetController::class , 'showDechet'])->name('show.dechet');
 Route::get('/show_produit_fini',[ProsuitFiniController::class , 'showProduitFini'])->name('show.produit_fini');
 Route::get('/show_Livraison',[LivraisonController::class , 'showLivraison'])->name('show.livraison');
+Route::get('/show_livraisonPaid',[LivraisonController::class , 'getPaid'])->name('show.paid');
+Route::get('/show_livraisonUnpaid',[LivraisonController::class , 'getUnpaid'])->name('show.unpaid');
+
 Route::get('/show_payement',[PayementController::class , 'showPayement'])->name('show.payement');
 
 Route::get('/Show_lastIdCommande',[CommandeController::class , 'Show_lastIdCommande'])->name('show.lastId');

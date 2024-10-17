@@ -14,7 +14,8 @@ class PayementController extends Controller
             $var = [
                 'livraison_id' => $request->livraison_id,
                 'montant' => $request->montant,
-                'mode_payement' => $request->mode_payement
+                'mode_payement' => $request->mode_payement,
+                'date_payement'=> $request->date_payement
             ];
             $insert = Payement::firstOrCreate($var);
 

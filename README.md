@@ -26,3 +26,12 @@ ajout de suppression fait
 
 *********************************
 ajout de nouvelle base sans contrainte
+
+
+***************************************************
+lien pour le recevoir les livraisons payé et non payé
+http://localhost/cod/public/api/show_livraisonPaid
+
+http://localhost/cod/public/api/show_livraisonUnpaid
+
+mettre date de payement : ok
