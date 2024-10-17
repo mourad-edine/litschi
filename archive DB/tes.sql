@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : jeu. 17 oct. 2024 à 15:35
+-- Généré le : mer. 16 oct. 2024 à 22:07
 -- Version du serveur : 10.4.32-MariaDB
 -- Version de PHP : 8.2.12
 
@@ -33,7 +33,7 @@ CREATE TABLE `commandes` (
   `fournisseur_id` int(11) NOT NULL,
   `quantite_commande` int(11) NOT NULL,
   `quantite_livre` int(3) DEFAULT NULL,
-  `etat` varchar(8) NOT NULL,
+  `etat` varchar(20) NOT NULL,
   `avance` int(10) DEFAULT NULL,
   `date_commande` date NOT NULL DEFAULT current_timestamp(),
   `created_at` timestamp NULL DEFAULT NULL,
@@ -45,12 +45,12 @@ CREATE TABLE `commandes` (
 --
 
 INSERT INTO `commandes` (`id`, `evenement_id`, `fournisseur_id`, `quantite_commande`, `quantite_livre`, `etat`, `avance`, `date_commande`, `created_at`, `updated_at`) VALUES
-(4, NULL, 2, 40, 80, 'annulé', 80000, '2024-10-16', '2024-10-16 12:03:43', '2024-10-17 10:23:17'),
+(4, NULL, 2, 40, 80, 'encours', 80000, '2024-10-16', '2024-10-16 12:03:43', '2024-10-16 12:09:07'),
 (5, NULL, 2, 40, NULL, 'envoyé', 80000, '2023-04-12', '2024-10-16 12:20:32', '2024-10-16 12:20:32'),
 (6, NULL, 3, 90, NULL, 'envoyé', 60000, '2023-04-12', '2024-10-16 12:21:44', '2024-10-16 12:21:44'),
 (7, NULL, 3, 120, 110, 'livré', 50000, '2023-04-12', '2024-10-16 12:22:39', '2024-10-16 12:42:18'),
-(8, NULL, 3, 40, 20, 'encours', 9500, '2023-04-12', '2024-10-16 13:12:22', '2024-10-17 10:33:20'),
-(9, NULL, 3, 60, NULL, 'annulé', 9500, '2023-04-12', '2024-10-16 13:14:15', '2024-10-17 10:24:04'),
+(8, NULL, 3, 9, NULL, 'envoyé', 9500, '2023-04-12', '2024-10-16 13:12:22', '2024-10-16 13:12:22'),
+(9, NULL, 3, 60, NULL, 'envoyé', 9500, '2023-04-12', '2024-10-16 13:14:15', '2024-10-16 13:14:15'),
 (10, NULL, 2, 30, NULL, 'envoyé', 58287, '2023-04-15', '2024-10-16 15:22:39', '2024-10-16 15:22:39');
 
 -- --------------------------------------------------------
@@ -128,8 +128,7 @@ CREATE TABLE `livraisons` (
   `commande_id` bigint(20) UNSIGNED NOT NULL,
   `sous_fournisseur_id` bigint(20) UNSIGNED DEFAULT NULL,
   `quantite` int(11) NOT NULL,
-  `nombre_caissette` int(7) NOT NULL,
-  `etat` varchar(8) NOT NULL DEFAULT 'non payé',
+  `etat` varchar(10) NOT NULL DEFAULT 'non payé',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -138,20 +137,19 @@ CREATE TABLE `livraisons` (
 -- Déchargement des données de la table `livraisons`
 --
 
-INSERT INTO `livraisons` (`id`, `fournisseur_id`, `commande_id`, `sous_fournisseur_id`, `quantite`, `nombre_caissette`, `etat`, `created_at`, `updated_at`) VALUES
-(6, 2, 4, NULL, 20, 0, 'non payé', '2024-10-16 12:04:42', '2024-10-16 12:04:42'),
-(7, 2, 4, NULL, 20, 0, 'non payé', '2024-10-16 12:05:17', '2024-10-16 12:05:17'),
-(9, 2, 4, NULL, 10, 0, 'payé', '2024-10-16 12:07:34', '2024-10-17 09:46:57'),
-(10, 2, 4, NULL, 0, 0, 'payé', '2024-10-16 12:08:05', '2024-10-16 13:50:09'),
-(11, 2, 4, NULL, 0, 0, 'non payé', '2024-10-16 12:08:18', '2024-10-16 12:08:18'),
-(12, 2, 4, NULL, 40, 0, 'non payé', '2024-10-16 12:08:29', '2024-10-16 12:08:29'),
-(13, 2, 4, NULL, 10, 0, 'non payé', '2024-10-16 12:09:07', '2024-10-16 12:09:07'),
-(14, 3, 7, NULL, 40, 0, 'non payé', '2024-10-16 12:39:30', '2024-10-16 12:39:30'),
-(15, 3, 7, NULL, 50, 0, 'payé', '2024-10-16 12:39:52', '2024-10-17 09:47:50'),
-(16, 3, 7, NULL, 20, 0, 'non payé', '2024-10-16 12:41:36', '2024-10-16 12:41:36'),
-(17, 3, 7, NULL, 20, 0, 'non payé', '2024-10-16 12:41:57', '2024-10-16 12:41:57'),
-(18, 3, 7, NULL, 10, 0, 'non payé', '2024-10-16 12:42:18', '2024-10-16 12:42:18'),
-(19, 2, 8, NULL, 20, 180, 'non payé', '2024-10-17 10:33:20', '2024-10-17 10:33:20');
+INSERT INTO `livraisons` (`id`, `fournisseur_id`, `commande_id`, `sous_fournisseur_id`, `quantite`, `etat`, `created_at`, `updated_at`) VALUES
+(6, 2, 4, NULL, 20, 'non payé', '2024-10-16 12:04:42', '2024-10-16 12:04:42'),
+(7, 2, 4, NULL, 20, 'non payé', '2024-10-16 12:05:17', '2024-10-16 12:05:17'),
+(9, 2, 4, NULL, 10, 'non payé', '2024-10-16 12:07:34', '2024-10-16 12:07:34'),
+(10, 2, 4, NULL, 0, 'payé', '2024-10-16 12:08:05', '2024-10-16 13:50:09'),
+(11, 2, 4, NULL, 0, 'non payé', '2024-10-16 12:08:18', '2024-10-16 12:08:18'),
+(12, 2, 4, NULL, 40, 'non payé', '2024-10-16 12:08:29', '2024-10-16 12:08:29'),
+(13, 2, 4, NULL, 10, 'non payé', '2024-10-16 12:09:07', '2024-10-16 12:09:07'),
+(14, 3, 7, NULL, 40, 'non payé', '2024-10-16 12:39:30', '2024-10-16 12:39:30'),
+(15, 3, 7, NULL, 50, 'non payé', '2024-10-16 12:39:52', '2024-10-16 12:39:52'),
+(16, 3, 7, NULL, 20, 'non payé', '2024-10-16 12:41:36', '2024-10-16 12:41:36'),
+(17, 3, 7, NULL, 20, 'non payé', '2024-10-16 12:41:57', '2024-10-16 12:41:57'),
+(18, 3, 7, NULL, 10, 'non payé', '2024-10-16 12:42:18', '2024-10-16 12:42:18');
 
 -- --------------------------------------------------------
 
@@ -164,7 +162,6 @@ CREATE TABLE `payements` (
   `livraison_id` bigint(20) UNSIGNED NOT NULL,
   `montant` int(11) NOT NULL,
   `mode_payement` varchar(255) NOT NULL,
-  `date_payement` date DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -173,10 +170,8 @@ CREATE TABLE `payements` (
 -- Déchargement des données de la table `payements`
 --
 
-INSERT INTO `payements` (`id`, `livraison_id`, `montant`, `mode_payement`, `date_payement`, `created_at`, `updated_at`) VALUES
-(2, 10, 500, 'mvola', NULL, '2024-10-16 13:50:09', '2024-10-16 13:50:09'),
-(3, 9, 200000, 'western union', NULL, '2024-10-17 09:46:57', '2024-10-17 09:46:57'),
-(4, 15, 30000, 'western union', '2023-05-12', '2024-10-17 09:47:50', '2024-10-17 09:47:50');
+INSERT INTO `payements` (`id`, `livraison_id`, `montant`, `mode_payement`, `created_at`, `updated_at`) VALUES
+(2, 10, 500, 'mvola', '2024-10-16 13:50:09', '2024-10-16 13:50:09');
 
 -- --------------------------------------------------------
 
@@ -466,13 +461,13 @@ ALTER TABLE `fournisseurs`
 -- AUTO_INCREMENT pour la table `livraisons`
 --
 ALTER TABLE `livraisons`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT pour la table `payements`
 --
 ALTER TABLE `payements`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT pour la table `personal_access_tokens`
