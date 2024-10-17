@@ -38,7 +38,7 @@ class Commande extends Model
     }
 
     public function getCommandeNoLivre(){
-        return Commande::wherenotin('etat', ['livré'])->get();
+        return Commande::wherenotin('etat', ['livré' , 'annulé'])->get();
     }
 
     public function getCommandeAnnule(){
