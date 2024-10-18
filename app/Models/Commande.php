@@ -15,6 +15,7 @@ class Commande extends Model
         'evenement_id',
         'quantite_livre',
         'quantite_commande',
+        'montant_avance',
         'etat',
         'date_commande'
     ];
