@@ -4,7 +4,6 @@ namespace App\Http\Controllers\livraison;
 
 use App\Http\Controllers\Controller;
 use App\Models\Commande;
-use App\Models\Evenement;
 use Illuminate\Http\Request;
 use App\Models\Livraison;
 class LivraisonController extends Controller
@@ -17,6 +16,7 @@ class LivraisonController extends Controller
                 'fournisseur_id' => $request->fournisseur_id,
                 'quantite' => $request->quantite,
                 'nombre_caissette' => $request->nombre_caissette,
+                'nom_sous_fournisseur' => $request->nom_sous_fournisseur,
                 'date_livraison' => $request->date_livraison,
             ];
             $livraison = Livraison::create($var);

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : ven. 18 oct. 2024 à 23:29
+-- Généré le : ven. 18 oct. 2024 à 23:48
 -- Version du serveur : 10.4.32-MariaDB
 -- Version de PHP : 8.2.12
 
@@ -42,8 +42,7 @@ CREATE TABLE `avances` (
 --
 
 INSERT INTO `avances` (`id`, `fournisseur_id`, `montant_avance`, `date_avance`, `mode_payement`, `created_at`, `updated_at`) VALUES
-(1, 2, 300000, '2023-05-05', 'orange', '2024-10-18 18:21:01', '2024-10-18 18:21:01'),
-(2, 2, 300000, '2023-05-05', 'orange', '2024-10-18 18:21:40', '2024-10-18 18:21:40');
+(1, 1, 300000, '2023-05-05', 'orange', '2024-10-18 18:46:41', '2024-10-18 18:46:41');
 
 -- --------------------------------------------------------
 
@@ -93,7 +92,8 @@ CREATE TABLE `commandes` (
 --
 
 INSERT INTO `commandes` (`id`, `fournisseur_id`, `nom_sous_fournisseur`, `quantite_commande`, `quantite_livre`, `montant_avance`, `etat`, `date_commande`, `created_at`, `updated_at`) VALUES
-(1, 1, NULL, 500, 0, 200, 'envoyé', '2024-05-05', '2024-10-18 18:20:36', '2024-10-18 18:20:36');
+(1, 1, NULL, 500, 20, 200000, 'encours', '2024-05-05', '2024-10-18 18:45:59', '2024-10-18 18:47:02'),
+(2, 1, NULL, 205, 0, 200000, 'envoyé', '2024-05-05', '2024-10-18 18:46:13', '2024-10-18 18:46:13');
 
 -- --------------------------------------------------------
 
@@ -146,8 +146,8 @@ CREATE TABLE `fournisseurs` (
 --
 
 INSERT INTO `fournisseurs` (`id`, `nom_fournisseur`, `adresse`, `contact`, `created_at`, `updated_at`) VALUES
-(1, 'pieere', 'france', '0321354685', '2024-10-18 18:20:20', '2024-10-18 18:20:20'),
-(2, 'francois', 'france', '0321354685', '2024-10-18 18:20:28', '2024-10-18 18:20:28');
+(1, 'nicole', 'paeis', '0321354685', '2024-10-18 18:45:38', '2024-10-18 18:45:38'),
+(2, 'mario', 'francois', '0321354685', '2024-10-18 18:45:50', '2024-10-18 18:45:50');
 
 -- --------------------------------------------------------
 
@@ -195,12 +195,19 @@ CREATE TABLE `livraisons` (
   `fournisseur_id` bigint(20) UNSIGNED NOT NULL,
   `nom_sous_fournisseur` varchar(50) DEFAULT NULL,
   `commande_id` bigint(20) UNSIGNED NOT NULL,
-  `sous_fournisseur_id` bigint(20) UNSIGNED NOT NULL,
   `quantite` int(11) NOT NULL,
+  `nombre_caissette` int(11) NOT NULL,
   `date_livraison` date DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Déchargement des données de la table `livraisons`
+--
+
+INSERT INTO `livraisons` (`id`, `fournisseur_id`, `nom_sous_fournisseur`, `commande_id`, `quantite`, `nombre_caissette`, `date_livraison`, `created_at`, `updated_at`) VALUES
+(1, 2, NULL, 1, 20, 180, NULL, '2024-10-18 18:47:02', '2024-10-18 18:47:02');
 
 -- --------------------------------------------------------
 
@@ -452,8 +459,7 @@ ALTER TABLE `job_batches`
 ALTER TABLE `livraisons`
   ADD PRIMARY KEY (`id`),
   ADD KEY `livraisons_fournisseur_id_foreign` (`fournisseur_id`),
-  ADD KEY `livraisons_commande_id_foreign` (`commande_id`),
-  ADD KEY `livraisons_sous_fournisseur_id_foreign` (`sous_fournisseur_id`);
+  ADD KEY `livraisons_commande_id_foreign` (`commande_id`);
 
 --
 -- Index pour la table `migrations`
@@ -537,13 +543,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT pour la table `avances`
 --
 ALTER TABLE `avances`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT pour la table `commandes`
 --
 ALTER TABLE `commandes`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT pour la table `dechets`
@@ -573,7 +579,7 @@ ALTER TABLE `jobs`
 -- AUTO_INCREMENT pour la table `livraisons`
 --
 ALTER TABLE `livraisons`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT pour la table `migrations`
@@ -657,8 +663,7 @@ ALTER TABLE `dechets`
 --
 ALTER TABLE `livraisons`
   ADD CONSTRAINT `livraisons_commande_id_foreign` FOREIGN KEY (`commande_id`) REFERENCES `commandes` (`id`),
-  ADD CONSTRAINT `livraisons_fournisseur_id_foreign` FOREIGN KEY (`fournisseur_id`) REFERENCES `fournisseurs` (`id`),
-  ADD CONSTRAINT `livraisons_sous_fournisseur_id_foreign` FOREIGN KEY (`sous_fournisseur_id`) REFERENCES `sous_fournisseurs` (`id`);
+  ADD CONSTRAINT `livraisons_fournisseur_id_foreign` FOREIGN KEY (`fournisseur_id`) REFERENCES `fournisseurs` (`id`);
 
 --
 -- Contraintes pour la table `palette_fournisseurs`

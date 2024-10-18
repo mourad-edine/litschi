@@ -10,7 +10,7 @@ class Livraison extends Model
     protected $table = "livraisons";
     protected $fillable = [
         'fournisseur_id',
-        'sous_fournisseur_id',
+        'nom_sous_fournisseur',
         'commande_id',
         'quantite',
         'nombre_caissette',
