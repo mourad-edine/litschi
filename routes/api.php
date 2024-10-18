@@ -12,8 +12,6 @@ use App\Http\Controllers\livraison\LivraisonController;
 use App\Http\Controllers\payement\PayementController;
 use App\Http\Controllers\produit\ProduitController;
 use App\Http\Controllers\sous_fournisseur\SousFournisseurController;
-use App\Http\Controllers\stock\StockController;
-use App\Http\Controllers\traitement\TraitementController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -35,7 +33,6 @@ Route::post('/create_payement',[PayementController::class , 'store_payement'])->
 Route::post('/create_avance',[AvanceController::class , 'store_avance'])->name('store.avance');
 
 Route::post('/create_sous_fournisseur',[SousFournisseurController::class , 'store_sous_fournisseur'])->name('store.sous_fournisseur');
-Route::post('/create_stock',[StockController::class , 'store_stock'])->name('store.stock');
 //soit au traitement ou soit ici
 Route::post('/create_dechet',[DechetController::class , 'store_dechet'])->name('store.dechet');
 //
@@ -53,7 +50,6 @@ Route::get('/show_avance',[AvanceController::class , 'showAvance'])->name('show.
 
 Route::get('/show_sous_fournisseur',[SousFournisseurController::class , 'showSousFournisseur'])->name('show.sous_fournisseur');
 Route::get('/show_produit',[ProduitController::class , 'showProduit'])->name('show.produit');
-Route::get('/show_stock',[StockController::class , 'showStock'])->name('show.stock');
 Route::get('/show_dechet',[DechetController::class , 'showDechet'])->name('show.dechet');
 Route::get('/show_Livraison',[LivraisonController::class , 'showLivraison'])->name('show.livraison');
 Route::get('/show_livraisonPaid',[LivraisonController::class , 'getPaid'])->name('show.paid');
@@ -70,9 +66,7 @@ Route::get('/details_livraison/{id}',[LivraisonController::class , 'detailLivrai
 Route::get('/details_fournisseur/{id}',[FournisseurController::class , 'detailfournisseur'])->name('detail.fournisseur');
 Route::get('/details_sous_fournisseur/{id}',[SousFournisseurController::class , 'detailSousFournisseur'])->name('detail.sous_fournisseur');
 Route::get('/details_evenement/{id}',[EvenementController::class , 'detailEvent'])->name('detail.event');
-Route::get('/details_stock/{id}',[StockController::class , 'detailStock'])->name('detail.Stock');
 Route::get('/details_dechet/{id}',[DechetController::class , 'detailDechet'])->name('detail.dechet');
-Route::get('/details_traitement/{id}',[TraitementController::class , 'detailTraitement'])->name('detail.traitement');
 Route::get('/details_payement/{id}',[PayementController::class , 'detailPayement'])->name('detail.payement');
 Route::get('/details_avance/{id}',[AvanceController::class , 'detailAvance'])->name('detail.avance');
 
@@ -84,9 +78,7 @@ Route::get('/delete_livraison/{id}',[LivraisonController::class , 'deleteLivrais
 Route::get('/delete_fournisseur/{id}',[FournisseurController::class , 'deletefournisseur'])->name('delete.fournisseur');
 Route::get('/delete_sous_fournisseur/{id}',[SousFournisseurController::class , 'deleteSousFournisseur'])->name('delete.sous_fournisseur');
 Route::get('/delete_evenement/{id}',[EvenementController::class , 'deleteEvent'])->name('delete.event');
-Route::get('/delete_stock/{id}',[StockController::class , 'deleteStock'])->name('delete.Stock');
 Route::get('/delete_dechet/{id}',[DechetController::class , 'deleteDechet'])->name('delete.dechet');
-Route::get('/delete_traitement/{id}',[TraitementController::class , 'deleteTraitement'])->name('delete.traitement');
 Route::get('/delete_payement/{id}',[PayementController::class , 'deletePayement'])->name('delete.payement');
 Route::get('/delete_avance/{id}',[AvanceController::class , 'deleteAvance'])->name('delete.avance');
 

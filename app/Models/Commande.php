@@ -16,7 +16,6 @@ class Commande extends Model
         'quantite_livre',
         'quantite_commande',
         'etat',
-        'avance',
         'date_commande'
     ];
     use HasFactory;
