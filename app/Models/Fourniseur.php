@@ -38,7 +38,7 @@ class Fourniseur extends Model
 
     public function commandes()
     {
-        return $this->hasMany(Commande::class);
+        return $this->hasMany(Commande::class , 'fournisseur_id');
     }
 
     
