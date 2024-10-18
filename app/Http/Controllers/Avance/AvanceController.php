@@ -46,7 +46,7 @@ class AvanceController extends Controller
 
     
     public function detailAvance($id){
-        $test = Avance::findOrfail($id);
+        $test = Fourniseur::findOrfail($id)->avance;
         return $test;
     }
     public function Show_lastIdAvance(){
