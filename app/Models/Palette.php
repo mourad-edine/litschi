@@ -9,11 +9,8 @@ class Palette extends Model
 {
     protected $table = "palettes";
     protected $fillable = [
-        'numero_palette',
         'type',
         'nombre_carton',
-        'created_at',
-        'updated_at'
     ];
     use HasFactory;
 
@@ -22,8 +19,8 @@ class Palette extends Model
         return $this->hasMany(PaletteFournisseur::class , 'palette_id');
     }
 
-    public function getAvance(){
-        return Avance::with('fournisseur')->get();
+    public function getPalette(){
+        return Palette::with('palette_fournisseurs')->get();
     }
     use HasFactory;
 }

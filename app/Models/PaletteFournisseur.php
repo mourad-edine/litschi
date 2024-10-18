@@ -11,7 +11,7 @@ class PaletteFournisseur extends Model
     protected $table = "palette_fournisseur";
     protected $fillable = [
         'fournisseur_id',
-        'numero_palette',
+        'palette_id',
         'type',
         'nombre_carton',
         'created_at',
@@ -27,5 +27,9 @@ class PaletteFournisseur extends Model
     public function fournisseur()
     {
         return $this->belongsTo(Fourniseur::class);
+    }
+
+    public function getPalettefournisseur(){
+        return PaletteFournisseur::all();
     }
 }

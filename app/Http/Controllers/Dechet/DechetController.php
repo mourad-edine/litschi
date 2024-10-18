@@ -12,7 +12,7 @@ class DechetController extends Controller
     {
         if ($request) {
             $var = [
-                'nombre_dechet' => $request->nom_fournisseur,
+                'nombre_dechet' => $request->nombre_dechet,
             ];
             $insert = Dechet::firstOrCreate($var);
             return $insert;
