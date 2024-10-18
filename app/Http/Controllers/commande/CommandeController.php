@@ -21,10 +21,9 @@ class CommandeController extends Controller
                 //etat ,id_commande
             ];
             $insert = Commande::create($var);
-            return [
-                "insert" => $insert,
-                "information" => $test->getCommande(),
-            ];
+            return response()->json([
+                'message' => 'Success'
+            ]);
         }else{
             $var = [
                 'fournisseur_id' => $request->fournisseur_id,
@@ -37,10 +36,10 @@ class CommandeController extends Controller
                 //etat ,id_commande
             ];
             $insert = Commande::create($var);
-            return [
-                "insert" => $insert,
-                "information" => $test->getCommande(),
-            ];
+            return response()->json([
+                'message' => 'Success',
+                'valeur' => $insert
+            ]);
         }
     }
     ///commande encoours ou envoyé
