@@ -17,7 +17,8 @@ class CommandeController extends Controller
                 'evenement_id' => $request->evenement_id,
                 'quantite_commande' => $request->quantite,
                 'etat' => "envoyé",
-                'date_commande' => $request->date
+                'date_commande' => $request->date,
+                'montant_avance' => $request->montant_avance
                 //etat ,id_commande
             ];
             $insert = Commande::create($var);
