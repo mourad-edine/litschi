@@ -4,23 +4,29 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 
-class Dechet extends Model
+class Avance extends Model
 {
 
-    protected $table = "dechets";
+    protected $table = "avances";
     protected $fillable = [
-        'nombre_dechet',
+        'fournisseur_id',
+        'montant_avance',
+        'date_avance',
+        'mode_payement',
+        'created_at',
+        'updated_at'
     ];
     use HasFactory;
 
     public function fournisseur()
     {
         return $this->belongsTo(Fourniseur::class);
+
     }
 
-    public function getDechet(){
-        return Dechet::with('fournisseur')->get();
+    public function getAvance(){
+        return Avance::with('fournisseur')->get();
     }
+
 }
