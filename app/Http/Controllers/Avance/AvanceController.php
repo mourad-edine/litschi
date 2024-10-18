@@ -38,7 +38,7 @@ class AvanceController extends Controller
     }
     ///commande encoours ou envoyé
     public function showAvance(){
-        $test = Fourniseur::with('avances')->get();
+        $test = Fourniseur::with('avance')->get();
         return $test;
     }
 
