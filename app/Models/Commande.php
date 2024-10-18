@@ -11,6 +11,7 @@ class Commande extends Model
     protected $table = "commandes";
     protected $fillable = [
         'fournisseur_id',
+        'nom_sous_fournisseur',
         'evenement_id',
         'quantite_livre',
         'quantite_commande',

@@ -11,9 +11,25 @@ class CommandeController extends Controller
     public function store_commande(Request $request)
     {
         $test = new Commande();
-        if ($request) {
+        if ($request->nom_sous_fournisseur == null) {
             $var = [
                 'fournisseur_id' => $request->fournisseur_id,
+                'evenement_id' => $request->evenement_id,
+                'quantite_commande' => $request->quantite,
+                'etat' => "envoyé",
+                'avance' => $request->avance,
+                'date_commande' => $request->date
+                //etat ,id_commande
+            ];
+            $insert = Commande::create($var);
+            return [
+                "insert" => $insert,
+                "information" => $test->getCommande(),
+            ];
+        }else{
+            $var = [
+                'fournisseur_id' => $request->fournisseur_id,
+                'nom_sous_fournisseur' => $request->nom_sous_fournisseur,
                 'evenement_id' => $request->evenement_id,
                 'quantite_commande' => $request->quantite,
                 'etat' => "envoyé",
