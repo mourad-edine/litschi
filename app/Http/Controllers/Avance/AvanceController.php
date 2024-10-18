@@ -42,7 +42,7 @@ class AvanceController extends Controller
     ///commande encoours ou envoyé
     public function showAvance()
     {
-        $test = Fourniseur::with('avance')->get();
+        $test = Fourniseur::whereHas('avance')->with('avance')->get();
         return $test;
     }
 
