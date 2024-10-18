@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : ven. 18 oct. 2024 à 21:08
+-- Généré le : ven. 18 oct. 2024 à 17:31
 -- Version du serveur : 10.4.32-MariaDB
 -- Version de PHP : 8.2.12
 
@@ -42,8 +42,9 @@ CREATE TABLE `avances` (
 --
 
 INSERT INTO `avances` (`id`, `fournisseur_id`, `montant_avance`, `date_avance`, `mode_payement`, `created_at`, `updated_at`) VALUES
+(1, 2, 40000, '2023-02-03', 'westernits', '2024-10-18 05:10:58', '2024-10-18 05:10:58'),
 (4, 3, 40000, '2023-02-03', 'westernits', '2024-10-18 05:16:16', '2024-10-18 05:16:16'),
-(11, 2, 300000, '2023-05-05', 'orange', '2024-10-18 13:28:19', '2024-10-18 13:28:19');
+(7, 1, 40000, '2023-02-03', 'westernits', '2024-10-18 05:19:12', '2024-10-18 05:19:12');
 
 -- --------------------------------------------------------
 
@@ -58,7 +59,6 @@ CREATE TABLE `commandes` (
   `nom_sous_fournisseur` varchar(50) DEFAULT NULL,
   `quantite_commande` int(11) NOT NULL,
   `quantite_livre` int(3) DEFAULT NULL,
-  `montant_avance` int(10) DEFAULT NULL,
   `etat` varchar(8) NOT NULL,
   `date_commande` date DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -69,17 +69,14 @@ CREATE TABLE `commandes` (
 -- Déchargement des données de la table `commandes`
 --
 
-INSERT INTO `commandes` (`id`, `evenement_id`, `fournisseur_id`, `nom_sous_fournisseur`, `quantite_commande`, `quantite_livre`, `montant_avance`, `etat`, `date_commande`, `created_at`, `updated_at`) VALUES
-(4, NULL, 2, '', 40, 80, NULL, 'annulé', '2024-10-16', '2024-10-16 12:03:43', '2024-10-17 10:23:17'),
-(5, NULL, 2, '', 40, NULL, NULL, 'envoyé', '2023-04-12', '2024-10-16 12:20:32', '2024-10-16 12:20:32'),
-(6, NULL, 3, '', 90, NULL, NULL, 'envoyé', '2023-04-12', '2024-10-16 12:21:44', '2024-10-16 12:21:44'),
-(7, NULL, 3, '', 120, 110, NULL, 'livré', '2023-04-12', '2024-10-16 12:22:39', '2024-10-16 12:42:18'),
-(8, NULL, 3, '', 40, 20, NULL, 'encours', '2023-04-12', '2024-10-16 13:12:22', '2024-10-17 10:33:20'),
-(9, NULL, 3, '', 60, NULL, NULL, 'annulé', '2023-04-12', '2024-10-16 13:14:15', '2024-10-17 10:24:04'),
-(10, NULL, 2, '', 30, NULL, NULL, 'envoyé', '2023-04-15', '2024-10-16 15:22:39', '2024-10-16 15:22:39'),
-(11, NULL, 2, NULL, 80, NULL, NULL, 'envoyé', '2023-05-08', '2024-10-18 12:47:47', '2024-10-18 12:47:47'),
-(12, NULL, 2, NULL, 100, NULL, NULL, 'envoyé', '2023-05-08', '2024-10-18 12:50:38', '2024-10-18 12:50:38'),
-(13, NULL, 3, NULL, 70, NULL, NULL, 'envoyé', '2023-05-08', '2024-10-18 13:25:25', '2024-10-18 13:25:25');
+INSERT INTO `commandes` (`id`, `evenement_id`, `fournisseur_id`, `nom_sous_fournisseur`, `quantite_commande`, `quantite_livre`, `etat`, `date_commande`, `created_at`, `updated_at`) VALUES
+(4, NULL, 2, '', 40, 80, 'annulé', '2024-10-16', '2024-10-16 12:03:43', '2024-10-17 10:23:17'),
+(5, NULL, 2, '', 40, NULL, 'envoyé', '2023-04-12', '2024-10-16 12:20:32', '2024-10-16 12:20:32'),
+(6, NULL, 3, '', 90, NULL, 'envoyé', '2023-04-12', '2024-10-16 12:21:44', '2024-10-16 12:21:44'),
+(7, NULL, 3, '', 120, 110, 'livré', '2023-04-12', '2024-10-16 12:22:39', '2024-10-16 12:42:18'),
+(8, NULL, 3, '', 40, 20, 'encours', '2023-04-12', '2024-10-16 13:12:22', '2024-10-17 10:33:20'),
+(9, NULL, 3, '', 60, NULL, 'annulé', '2023-04-12', '2024-10-16 13:14:15', '2024-10-17 10:24:04'),
+(10, NULL, 2, '', 30, NULL, 'envoyé', '2023-04-15', '2024-10-16 15:22:39', '2024-10-16 15:22:39');
 
 -- --------------------------------------------------------
 
@@ -355,13 +352,13 @@ ALTER TABLE `sessions`
 -- AUTO_INCREMENT pour la table `avances`
 --
 ALTER TABLE `avances`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT pour la table `commandes`
 --
 ALTER TABLE `commandes`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT pour la table `dechets`
