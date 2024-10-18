@@ -11,11 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('sous_fournisseurs', function (Blueprint $table) {
+        Schema::create('commandes', function (Blueprint $table) {
             $table->id();
             $table->foreignId('fournisseur_id')->constrained('fournisseurs');
-            $table->string('nom_sous_fournisseur', 100);
-            $table->string('adresse',50);
+            $table->integer('nom_sous_fournisseur')->nullable();
+            $table->integer('quantite_commande');
+            $table->integer('quantite_livre')->default(0);
+            $table->integer('montant_avance');
+            $table->string('etat' ,10);
+            $table->date('date_commande')->nullable();
             $table->timestamps();
         });
     }
@@ -25,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('sous_fournisseurs');
+        Schema::dropIfExists('commandes');
     }
 };

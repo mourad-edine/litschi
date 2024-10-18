@@ -28,11 +28,6 @@ class Livraison extends Model
         return $this->belongsTo(Fourniseur::class);
     }
 
-    public function factures()
-    {
-        return $this->hasMany(Facture::class);
-    }
-
     public function getLivraison(){
         return Livraison::with('fournisseur')->get();
     }

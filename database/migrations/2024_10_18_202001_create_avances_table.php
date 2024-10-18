@@ -11,9 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('dechets', function (Blueprint $table) {
+        Schema::create('avances', function (Blueprint $table) {
             $table->id();
-            $table->integer('nombre_dechet');
+            $table->foreignId('fournisseur_id')->constrained('fournisseurs');
+            $table->integer('montant_avance')->nullable();
+            $table->date('date_avance');
+            $table->string('mode_payement');
             $table->timestamps();
         });
     }
@@ -23,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('dechets');
+        Schema::dropIfExists('avances');
     }
 };

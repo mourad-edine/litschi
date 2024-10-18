@@ -30,3 +30,4 @@ class Avance extends Model
     }
 
 }
+

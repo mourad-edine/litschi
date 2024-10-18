@@ -2,24 +2,18 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Api\ApiController;
 use App\Http\Controllers\Avance\AvanceController;
 use App\Http\Controllers\commande\CommandeController;
 use App\Http\Controllers\Dechet\DechetController;
-use App\Http\Controllers\evenement\EvenementController;
 use App\Http\Controllers\fournisseur\FournisseurController;
 use App\Http\Controllers\livraison\LivraisonController;
 use App\Http\Controllers\payement\PayementController;
-use App\Http\Controllers\produit\ProduitController;
 use App\Http\Controllers\sous_fournisseur\SousFournisseurController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
-Route::get('/reception',[ApiController::class , 'index'])->name('accueil');
-Route::post('/storer',[ApiController::class , 'store'])->name('store.name');
-Route::get('/details/{id}',[ApiController::class , 'detail'])->name('detail.user');
 
 /**********************creation****************** */
 
@@ -27,8 +21,6 @@ Route::get('/details/{id}',[ApiController::class , 'detail'])->name('detail.user
 Route::post('/create_livraison',[LivraisonController::class , 'store_livraison'])->name('store.livraison');
 Route::post('/create_commande',[CommandeController::class , 'store_commande'])->name('store.commande');
 Route::post('/create_fournisseur',[FournisseurController::class , 'store_fournisseur'])->name('store.fournisseur');
-Route::post('/create_evenement',[EvenementController::class , 'store_evenement'])->name('store.event');
-Route::post('/create_produit',[ProduitController::class , 'store_produit'])->name('store.produit');
 Route::post('/create_payement',[PayementController::class , 'store_payement'])->name('store.payement');
 Route::post('/create_avance',[AvanceController::class , 'store_avance'])->name('store.avance');
 
@@ -39,7 +31,6 @@ Route::post('/create_dechet',[DechetController::class , 'store_dechet'])->name('
 
 
 /**********************affichage********************** */
-Route::get('/show_evenement',[EvenementController::class , 'showEvenement'])->name('show.event');
 Route::get('/show_commande',[CommandeController::class , 'showCommande'])->name('show.commande');
 Route::get('/show_commande_annule',[CommandeController::class , 'showCommandeAnnule'])->name('show.commandeannule');
 Route::get('/show_commande_non_livre',[CommandeController::class , 'showCommandeNoLivre'])->name('show.commandenolivre');
@@ -49,7 +40,6 @@ Route::get('/show_fournisseur',[FournisseurController::class , 'showFournisseur'
 Route::get('/show_avance',[AvanceController::class , 'showAvance'])->name('show.avance');
 
 Route::get('/show_sous_fournisseur',[SousFournisseurController::class , 'showSousFournisseur'])->name('show.sous_fournisseur');
-Route::get('/show_produit',[ProduitController::class , 'showProduit'])->name('show.produit');
 Route::get('/show_dechet',[DechetController::class , 'showDechet'])->name('show.dechet');
 Route::get('/show_Livraison',[LivraisonController::class , 'showLivraison'])->name('show.livraison');
 Route::get('/show_livraisonPaid',[LivraisonController::class , 'getPaid'])->name('show.paid');
@@ -65,7 +55,6 @@ Route::get('/details_commande/{id}',[CommandeController::class , 'detailCommande
 Route::get('/details_livraison/{id}',[LivraisonController::class , 'detailLivraison'])->name('detail.livraison');
 Route::get('/details_fournisseur/{id}',[FournisseurController::class , 'detailfournisseur'])->name('detail.fournisseur');
 Route::get('/details_sous_fournisseur/{id}',[SousFournisseurController::class , 'detailSousFournisseur'])->name('detail.sous_fournisseur');
-Route::get('/details_evenement/{id}',[EvenementController::class , 'detailEvent'])->name('detail.event');
 Route::get('/details_dechet/{id}',[DechetController::class , 'detailDechet'])->name('detail.dechet');
 Route::get('/details_payement/{id}',[PayementController::class , 'detailPayement'])->name('detail.payement');
 Route::get('/details_avance/{id}',[AvanceController::class , 'detailAvance'])->name('detail.avance');
@@ -77,7 +66,6 @@ Route::get('/delete_commande/{id}',[CommandeController::class , 'deleteCommande'
 Route::get('/delete_livraison/{id}',[LivraisonController::class , 'deleteLivraison'])->name('delete.livraison');
 Route::get('/delete_fournisseur/{id}',[FournisseurController::class , 'deletefournisseur'])->name('delete.fournisseur');
 Route::get('/delete_sous_fournisseur/{id}',[SousFournisseurController::class , 'deleteSousFournisseur'])->name('delete.sous_fournisseur');
-Route::get('/delete_evenement/{id}',[EvenementController::class , 'deleteEvent'])->name('delete.event');
 Route::get('/delete_dechet/{id}',[DechetController::class , 'deleteDechet'])->name('delete.dechet');
 Route::get('/delete_payement/{id}',[PayementController::class , 'deletePayement'])->name('delete.payement');
 Route::get('/delete_avance/{id}',[AvanceController::class , 'deleteAvance'])->name('delete.avance');

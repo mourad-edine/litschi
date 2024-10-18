@@ -12,7 +12,6 @@ class Commande extends Model
     protected $fillable = [
         'fournisseur_id',
         'nom_sous_fournisseur',
-        'evenement_id',
         'quantite_livre',
         'quantite_commande',
         'montant_avance',
@@ -21,10 +20,6 @@ class Commande extends Model
     ];
     use HasFactory;
 
-    public function evenement()
-    {
-        return $this->belongsTo(Evenement::class);
-    }
     public function fournisseur()
     {
         return $this->belongsTo(Fourniseur::class);
