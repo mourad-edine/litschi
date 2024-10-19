@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : ven. 18 oct. 2024 à 23:48
+-- Généré le : sam. 19 oct. 2024 à 10:03
 -- Version du serveur : 10.4.32-MariaDB
 -- Version de PHP : 8.2.12
 
@@ -36,13 +36,6 @@ CREATE TABLE `avances` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Déchargement des données de la table `avances`
---
-
-INSERT INTO `avances` (`id`, `fournisseur_id`, `montant_avance`, `date_avance`, `mode_payement`, `created_at`, `updated_at`) VALUES
-(1, 1, 300000, '2023-05-05', 'orange', '2024-10-18 18:46:41', '2024-10-18 18:46:41');
 
 -- --------------------------------------------------------
 
@@ -77,7 +70,7 @@ CREATE TABLE `cache_locks` (
 CREATE TABLE `commandes` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `fournisseur_id` bigint(20) UNSIGNED NOT NULL,
-  `nom_sous_fournisseur` int(11) DEFAULT NULL,
+  `nom_sous_fournisseur` varchar(50) DEFAULT NULL,
   `quantite_commande` int(11) NOT NULL,
   `quantite_livre` int(11) NOT NULL DEFAULT 0,
   `montant_avance` int(11) NOT NULL,
@@ -92,8 +85,15 @@ CREATE TABLE `commandes` (
 --
 
 INSERT INTO `commandes` (`id`, `fournisseur_id`, `nom_sous_fournisseur`, `quantite_commande`, `quantite_livre`, `montant_avance`, `etat`, `date_commande`, `created_at`, `updated_at`) VALUES
-(1, 1, NULL, 500, 20, 200000, 'encours', '2024-05-05', '2024-10-18 18:45:59', '2024-10-18 18:47:02'),
-(2, 1, NULL, 205, 0, 200000, 'envoyé', '2024-05-05', '2024-10-18 18:46:13', '2024-10-18 18:46:13');
+(1, 1, NULL, 500, 60, 200000, 'encours', '2024-05-05', '2024-10-18 18:45:59', '2024-10-19 04:49:35'),
+(2, 1, NULL, 205, 0, 200000, 'envoyé', '2024-05-05', '2024-10-18 18:46:13', '2024-10-18 18:46:13'),
+(3, 1, NULL, 205, 0, 70000, 'envoyé', '2024-05-06', '2024-10-19 03:10:16', '2024-10-19 03:10:16'),
+(4, 1, NULL, 205, 0, 70000, 'envoyé', '2024-05-06', '2024-10-19 03:11:06', '2024-10-19 03:11:06'),
+(5, 2, NULL, 205, 0, 70000, 'envoyé', '2024-05-06', '2024-10-19 04:51:32', '2024-10-19 04:51:32'),
+(6, 2, NULL, 205, 0, 70000, 'envoyé', '2024-05-06', '2024-10-19 04:54:43', '2024-10-19 04:54:43'),
+(7, 2, NULL, 205, 0, 70000, 'envoyé', '2024-05-06', '2024-10-19 04:55:50', '2024-10-19 04:55:50'),
+(8, 2, 'floruios', 205, 0, 70000, 'envoyé', '2024-05-06', '2024-10-19 04:59:09', '2024-10-19 04:59:09'),
+(9, 2, NULL, 205, 0, 70000, 'envoyé', '2024-05-06', '2024-10-19 04:59:35', '2024-10-19 04:59:35');
 
 -- --------------------------------------------------------
 
@@ -207,7 +207,9 @@ CREATE TABLE `livraisons` (
 --
 
 INSERT INTO `livraisons` (`id`, `fournisseur_id`, `nom_sous_fournisseur`, `commande_id`, `quantite`, `nombre_caissette`, `date_livraison`, `created_at`, `updated_at`) VALUES
-(1, 2, NULL, 1, 20, 180, NULL, '2024-10-18 18:47:02', '2024-10-18 18:47:02');
+(1, 2, NULL, 1, 20, 180, NULL, '2024-10-18 18:47:02', '2024-10-18 18:47:02'),
+(2, 2, NULL, 1, 20, 180, '2023-02-02', '2024-10-18 18:58:38', '2024-10-18 18:58:38'),
+(3, 2, 'patrick', 1, 20, 180, '2023-02-02', '2024-10-19 04:49:35', '2024-10-19 04:49:35');
 
 -- --------------------------------------------------------
 
@@ -371,6 +373,13 @@ CREATE TABLE `today_prices` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Déchargement des données de la table `today_prices`
+--
+
+INSERT INTO `today_prices` (`id`, `prix`, `date_today`, `created_at`, `updated_at`) VALUES
+(1, 200, '2024-03-03', '2024-10-19 04:23:20', '2024-10-19 04:23:20');
 
 -- --------------------------------------------------------
 
@@ -543,13 +552,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT pour la table `avances`
 --
 ALTER TABLE `avances`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT pour la table `commandes`
 --
 ALTER TABLE `commandes`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT pour la table `dechets`
@@ -579,7 +588,7 @@ ALTER TABLE `jobs`
 -- AUTO_INCREMENT pour la table `livraisons`
 --
 ALTER TABLE `livraisons`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT pour la table `migrations`
@@ -627,7 +636,7 @@ ALTER TABLE `sous_fournisseurs`
 -- AUTO_INCREMENT pour la table `today_prices`
 --
 ALTER TABLE `today_prices`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT pour la table `users`
