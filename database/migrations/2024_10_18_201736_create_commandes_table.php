@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('nom_sous_fournisseur' , 50)->nullable();
             $table->integer('quantite_commande');
             $table->integer('quantite_livre')->default(0);
-            $table->integer('montant_avance');
+            $table->integer('montant_avance')->nullable();
             $table->string('etat' ,10);
             $table->date('date_commande')->nullable();
             $table->timestamps();
