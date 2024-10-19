@@ -32,7 +32,7 @@ class CommandeController extends Controller
                 'evenement_id' => $request->evenement_id,
                 'quantite_commande' => $request->quantite,
                 'etat' => "envoyé",
-                'avance' => $request->avance,
+                'montant_avance' => $request->montant_avance,
                 'date_commande' => $request->date
                 //etat ,id_commande
             ];
