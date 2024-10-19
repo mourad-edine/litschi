@@ -32,7 +32,7 @@ class Livraison extends Model
             return [
                 'livraison_id' => $livraison->id,
                 'etat' => $livraison->etat,
-                'quantite' => $livraison->quantite,
+                'quantite_livre' => $livraison->quantite,
                 'nombre_caissette' =>  $livraison->nombre_caissette,
                 'date_livraison' => $livraison->date_livraison,
                 'commande_id' => $livraison->commande->id,
