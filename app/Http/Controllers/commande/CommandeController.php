@@ -80,6 +80,12 @@ class CommandeController extends Controller
             'message' => 'valeur supprimé avec succès'
         ]);
     }
+    public function detailCommande2($id){
+        $valeur = Commande::findorfail($id);
+        return response()->json([
+            'quantite_commande' => $valeur->quantite_commande
+        ]);
+    }
 
     public function AnnulerCommande($id){
         $valeur = Commande::findorfail($id);

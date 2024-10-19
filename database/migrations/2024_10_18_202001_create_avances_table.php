@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('avances', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('fournisseur_id')->constrained('fournisseurs');
+            $table->foreignId('fournisseur_id')->constrained('fournisseurs')->unique();
             $table->integer('montant_avance')->nullable();
             $table->date('date_avance');
             $table->string('mode_payement');
