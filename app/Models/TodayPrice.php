@@ -9,9 +9,9 @@ class TodayPrice extends Model
 {
     use HasFactory;
 
-    protected $table = "today_prix";
+    protected $table = "today_prices";
     protected $fillable = [
         'prix',
-        'date_prix'
+        'date_today'
     ];
 }
