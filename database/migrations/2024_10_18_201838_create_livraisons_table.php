@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('commande_id')->constrained('commandes');
             $table->integer('quantite');
             $table->integer('nombre_caissette');
+            $table->string('etat',10)->default('non payé');
             $table->date('date_livraison')->nullable();
             $table->timestamps();
         });

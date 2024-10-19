@@ -12,7 +12,8 @@ class Livraison extends Model
         'commande_id',
         'quantite',
         'nombre_caissette',
-        'date_livraison'
+        'date_livraison',
+        'etat'
     ];
     use HasFactory;
 
@@ -27,7 +28,22 @@ class Livraison extends Model
     }
 
     public function getLivraison(){
-        return Livraison::with('fournisseur')->get();
+        $test = Livraison::with('commande.fournisseur')->get()->map(function($livraison) {
+            return [
+                'livraison_id' => $livraison->id,
+                'etat' => $livraison->etat,
+                'quantite' => $livraison->quantite,
+                'nombre_caissette' =>  $livraison->nombre_caissette,
+                'date_livraison' => $livraison->date_livraison,
+                'commande_id' => $livraison->commande->id,
+                'fournisseur_id' => $livraison->commande->fournisseur->id,
+                'nom_fournisseur' => $livraison->commande->fournisseur->nom_fournisseur,
+                'nom_sous_fournisseur' => $livraison->commande->fournisseur->nom_sous_fournisseur,
+                // Ajoutez d'autres colonnes nécessaires ici
+            ];
+        });
+        
+        return $test;
     }
 
 }

@@ -16,6 +16,7 @@ class LivraisonController extends Controller
                 'quantite' => $request->quantite,
                 'nombre_caissette' => $request->nombre_caissette,
                 'date_livraison' => $request->date_livraison,
+                'etat' => 'non payé'
             ];
             $livraison = Livraison::create($var);
 
