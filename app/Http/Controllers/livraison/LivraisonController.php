@@ -29,6 +29,8 @@ class LivraisonController extends Controller
                 }
                 else if($commande->quantite_commande == $commande->quantite_livre + $livraison->quantite){
                     $commande->etat = "livré";
+                    $commande->quantite_livre += $livraison->quantite;
+
                 }
                 else{
                     $commande->quantite_livre += $livraison->quantite;
