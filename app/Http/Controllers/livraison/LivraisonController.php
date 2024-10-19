@@ -4,6 +4,7 @@ namespace App\Http\Controllers\livraison;
 
 use App\Http\Controllers\Controller;
 use App\Models\Commande;
+use App\Models\Dechet;
 use Illuminate\Http\Request;
 use App\Models\Livraison;
 class LivraisonController extends Controller
@@ -33,20 +34,35 @@ class LivraisonController extends Controller
                     return response()->json([
                         'message' => 'commande livré'
                     ]);
+                    $tab_dechet = [
+                        'fournisseur_id' => $commande->fournisseur_id,
+                        'livraison_id' => $livraison->id,
+                        'pourcentage_dechet' => $request->pourcentage_dechet
+                    ];
+                    Dechet::create($tab_dechet);
                 }
                 else if($commande->quantite_commande > $commande->quantite_livre + $livraison->quantite){
                     $commande->quantite_livre += $livraison->quantite;
                     $commande->etat = "encours";
+                    $tab_dechet = [
+                        'fournisseur_id' => $commande->fournisseur_id,
+                        'livraison_id' => $livraison->id,
+                        'pourcentage_dechet' => $request->pourcentage_dechet
+                    ];
+                    Dechet::create($tab_dechet);
                 }else{
+                   
                     return response()->json([
                         'message' => 'une erreur est survenu'
                     ]);
                 }
+                
 
                 $commande->save();
                     
 
             }
+            
 
             return $livraison;
 

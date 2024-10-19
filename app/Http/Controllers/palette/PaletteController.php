@@ -10,6 +10,7 @@ class PaletteController extends Controller
 {
     public function store_palette(Request $request)
     {
+       
         if ($request) {
             $var = [
                 'type' => $request->type,
