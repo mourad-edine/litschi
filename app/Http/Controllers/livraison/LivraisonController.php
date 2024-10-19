@@ -13,7 +13,6 @@ class LivraisonController extends Controller
         if ($request) {
             $var = [
                 'commande_id' => $request->commande_id,
-                'fournisseur_id' => $request->fournisseur_id,
                 'quantite' => $request->quantite,
                 'nombre_caissette' => $request->nombre_caissette,
                 'nom_sous_fournisseur' => $request->nom_sous_fournisseur,

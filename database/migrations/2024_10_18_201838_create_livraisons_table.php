@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('livraisons', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('fournisseur_id')->constrained('fournisseurs');
             $table->string('nom_sous_fournisseur' , 50)->nullable();
             $table->foreignId('commande_id')->constrained('commandes');
             $table->integer('quantite');

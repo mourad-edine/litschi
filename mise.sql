@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : sam. 19 oct. 2024 à 10:12
+-- Généré le : sam. 19 oct. 2024 à 11:12
 -- Version du serveur : 10.4.32-MariaDB
 -- Version de PHP : 8.2.12
 
@@ -93,7 +93,9 @@ INSERT INTO `commandes` (`id`, `fournisseur_id`, `nom_sous_fournisseur`, `quanti
 (6, 2, NULL, 205, 0, 70000, 'envoyé', '2024-05-06', '2024-10-19 04:54:43', '2024-10-19 04:54:43'),
 (7, 2, NULL, 205, 0, 70000, 'envoyé', '2024-05-06', '2024-10-19 04:55:50', '2024-10-19 04:55:50'),
 (8, 2, 'floruios', 205, 0, 70000, 'envoyé', '2024-05-06', '2024-10-19 04:59:09', '2024-10-19 04:59:09'),
-(9, 2, NULL, 205, 0, 70000, 'envoyé', '2024-05-06', '2024-10-19 04:59:35', '2024-10-19 04:59:35');
+(9, 2, NULL, 205, 0, 70000, 'envoyé', '2024-05-06', '2024-10-19 04:59:35', '2024-10-19 04:59:35'),
+(10, 2, NULL, 205, 0, 70000, 'envoyé', '2024-05-06', '2024-10-19 05:22:04', '2024-10-19 05:22:04'),
+(11, 2, NULL, 400, 0, 200500, 'envoyé', '2024-05-06', '2024-10-19 05:23:54', '2024-10-19 05:23:54');
 
 -- --------------------------------------------------------
 
@@ -192,7 +194,6 @@ CREATE TABLE `job_batches` (
 
 CREATE TABLE `livraisons` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `fournisseur_id` bigint(20) UNSIGNED NOT NULL,
   `nom_sous_fournisseur` varchar(50) DEFAULT NULL,
   `commande_id` bigint(20) UNSIGNED NOT NULL,
   `quantite` int(11) NOT NULL,
@@ -206,10 +207,10 @@ CREATE TABLE `livraisons` (
 -- Déchargement des données de la table `livraisons`
 --
 
-INSERT INTO `livraisons` (`id`, `fournisseur_id`, `nom_sous_fournisseur`, `commande_id`, `quantite`, `nombre_caissette`, `date_livraison`, `created_at`, `updated_at`) VALUES
-(1, 2, NULL, 1, 20, 180, NULL, '2024-10-18 18:47:02', '2024-10-18 18:47:02'),
-(2, 2, NULL, 1, 20, 180, '2023-02-02', '2024-10-18 18:58:38', '2024-10-18 18:58:38'),
-(3, 2, 'patrick', 1, 20, 180, '2023-02-02', '2024-10-19 04:49:35', '2024-10-19 04:49:35');
+INSERT INTO `livraisons` (`id`, `nom_sous_fournisseur`, `commande_id`, `quantite`, `nombre_caissette`, `date_livraison`, `created_at`, `updated_at`) VALUES
+(1, NULL, 1, 20, 180, NULL, '2024-10-18 18:47:02', '2024-10-18 18:47:02'),
+(2, NULL, 1, 20, 180, '2023-02-02', '2024-10-18 18:58:38', '2024-10-18 18:58:38'),
+(3, 'patrick', 1, 20, 180, '2023-02-02', '2024-10-19 04:49:35', '2024-10-19 04:49:35');
 
 -- --------------------------------------------------------
 
@@ -467,7 +468,6 @@ ALTER TABLE `job_batches`
 --
 ALTER TABLE `livraisons`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `livraisons_fournisseur_id_foreign` (`fournisseur_id`),
   ADD KEY `livraisons_commande_id_foreign` (`commande_id`);
 
 --
@@ -558,7 +558,7 @@ ALTER TABLE `avances`
 -- AUTO_INCREMENT pour la table `commandes`
 --
 ALTER TABLE `commandes`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT pour la table `dechets`
@@ -671,8 +671,7 @@ ALTER TABLE `dechets`
 -- Contraintes pour la table `livraisons`
 --
 ALTER TABLE `livraisons`
-  ADD CONSTRAINT `livraisons_commande_id_foreign` FOREIGN KEY (`commande_id`) REFERENCES `commandes` (`id`),
-  ADD CONSTRAINT `livraisons_fournisseur_id_foreign` FOREIGN KEY (`fournisseur_id`) REFERENCES `fournisseurs` (`id`);
+  ADD CONSTRAINT `livraisons_commande_id_foreign` FOREIGN KEY (`commande_id`) REFERENCES `commandes` (`id`);
 
 --
 -- Contraintes pour la table `palette_fournisseurs`
