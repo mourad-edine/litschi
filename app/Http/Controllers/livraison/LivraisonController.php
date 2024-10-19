@@ -15,7 +15,6 @@ class LivraisonController extends Controller
                 'commande_id' => $request->commande_id,
                 'quantite' => $request->quantite,
                 'nombre_caissette' => $request->nombre_caissette,
-                'nom_sous_fournisseur' => $request->nom_sous_fournisseur,
                 'date_livraison' => $request->date_livraison,
             ];
             $livraison = Livraison::create($var);
