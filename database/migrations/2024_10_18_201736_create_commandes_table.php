@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('commandes', function (Blueprint $table) {
             $table->id();
             $table->foreignId('fournisseur_id')->constrained('fournisseurs');
-            $table->integer('nom_sous_fournisseur')->nullable();
+            $table->string('nom_sous_fournisseur' , 50)->nullable();
             $table->integer('quantite_commande');
             $table->integer('quantite_livre')->default(0);
             $table->integer('montant_avance');
