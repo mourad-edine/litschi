@@ -97,6 +97,9 @@ class CommandeController extends Controller
             'message' => 'commande annulé avec succes'
         ]);
     }
+    public function showCommandeLivre(){
+        return Commande::where('etat', ['livré'])->with('fournisseur')->get();
+    }
 }
 
 

@@ -30,11 +30,17 @@ class LivraisonController extends Controller
                 else if($commande->quantite_commande == $commande->quantite_livre + $livraison->quantite){
                     $commande->etat = "livré";
                     $commande->quantite_livre += $livraison->quantite;
-
+                    return response()->json([
+                        'message' => 'commande livré'
+                    ]);
                 }
-                else{
+                else if($commande->quantite_commande > $commande->quantite_livre + $livraison->quantite){
                     $commande->quantite_livre += $livraison->quantite;
                     $commande->etat = "encours";
+                }else{
+                    return response()->json([
+                        'message' => 'une erreur est survenu'
+                    ]);
                 }
 
                 $commande->save();

@@ -38,6 +38,8 @@ Route::post('/create_price',[PriceTodayController::class , 'store_price'])->name
 Route::get('/show_commande',[CommandeController::class , 'showCommande'])->name('show.commande');
 Route::get('/show_commande_annule',[CommandeController::class , 'showCommandeAnnule'])->name('show.commandeannule');
 Route::get('/show_commande_non_livre',[CommandeController::class , 'showCommandeNoLivre'])->name('show.commandenolivre');
+Route::get('/show_commande_livre',[CommandeController::class , 'showCommandeLivre'])->name('show.commandelivre');
+
 Route::get('/show_palette',[PaletteController::class , 'showPalette'])->name('show.palette');
 Route::get('/show_palette_fournisseur',[PaletteFournisseurController::class , 'showPaletteFournisseur'])->name('show.palettteFournisseur');
 
