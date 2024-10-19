@@ -62,7 +62,7 @@ class AvanceController extends Controller
 
     public function deleteAvance($id)
     {
-        $valeur = Avance::findorfail($id);
+        $valeur = Fourniseur::findOrfail($id)->avance;
         if ($valeur) {
             $valeur->delete();
         }
