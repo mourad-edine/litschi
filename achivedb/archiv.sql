@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : sam. 19 oct. 2024 à 10:12
+-- Généré le : sam. 19 oct. 2024 à 10:03
 -- Version du serveur : 10.4.32-MariaDB
 -- Version de PHP : 8.2.12
 
@@ -73,7 +73,7 @@ CREATE TABLE `commandes` (
   `nom_sous_fournisseur` varchar(50) DEFAULT NULL,
   `quantite_commande` int(11) NOT NULL,
   `quantite_livre` int(11) NOT NULL DEFAULT 0,
-  `montant_avance` int(11) DEFAULT NULL,
+  `montant_avance` int(11) NOT NULL,
   `etat` varchar(10) NOT NULL,
   `date_commande` date DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
