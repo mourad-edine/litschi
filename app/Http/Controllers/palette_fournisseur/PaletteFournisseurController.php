@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\palette_fournisseur;
 
 use App\Http\Controllers\Controller;
+use App\Models\Palette;
 use App\Models\PaletteFournisseur;
 use Illuminate\Http\Request;
 
@@ -10,11 +11,15 @@ class PaletteFournisseurController extends Controller
 {
     public function store_palette_fournisseur(Request $request)
     {
-        dd($request->all());
         if ($request) {
+            $palette = [
+                'type' => $request->type,
+                'nombre_carton' => $request->nombre_carton,
+            ];
+            $insert = Palette::firstOrCreate($palette);
             foreach($request->fournisseur as $fournisseur){
                 $insert = PaletteFournisseur::firstOrCreate([
-                    'palette_id' => $request->palette_id,
+                    'palette_id' => $insert->id,
                     'type' => $request->type,
                     'nombre_carton' => $fournisseur['nombre_carton'],
                     'fournsseur_id' => $fournisseur['fournisseur_id']

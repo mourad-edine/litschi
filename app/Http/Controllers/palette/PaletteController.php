@@ -12,11 +12,11 @@ class PaletteController extends Controller
     {
        
         if ($request) {
-            $var = [
+            $palette = [
                 'type' => $request->type,
                 'nombre_carton' => $request->nombre_carton,
             ];
-            $insert = Palette::firstOrCreate($var);
+            $insert = Palette::firstOrCreate($palette);
             return $insert;
 
         }
