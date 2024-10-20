@@ -41,9 +41,6 @@ class LivraisonController extends Controller
                 ]);
 
             }
-
-
-
             $commande->save();
         }
 

@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('livraison_id')->constrained('livraisons');
             $table->foreignId('fournisseur_id')->constrained('fournisseurs');
-            $table->foreignId('today_price_id')->constrained('today_prices');
-            $table->integer('montant');
+            $table->foreignId('prix_jour');
+            $table->integer('montant_avance');
             $table->string('mode_payement');
             $table->date('date_payement')->nullable();
             $table->timestamps();

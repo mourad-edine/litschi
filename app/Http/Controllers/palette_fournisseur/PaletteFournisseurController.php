@@ -10,6 +10,7 @@ class PaletteFournisseurController extends Controller
 {
     public function store_palette_fournisseur(Request $request)
     {
+        dd($request->all());
         if ($request) {
             foreach($request->fournisseur as $fournisseur){
                 $insert = PaletteFournisseur::firstOrCreate([
