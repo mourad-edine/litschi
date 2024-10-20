@@ -21,33 +21,48 @@ class LivraisonController extends Controller
                 'date_livraison' => $request->date_livraison,
                 'etat' => 'non payé'
             ];
-            $livraison = Livraison::create($var);
 
             $commande = Commande::findOrFail($request->commande_id);
             if ($commande) {
-                $commande->quantite_livre += $request->quantite;
-                if($commande->quantite_livre == $commande->quantite_commande){
+                $test = (int)$commande->quantite_livre + (int)$request->quantite;
+                if($test == (int)$commande->quantite_commande){
                     $commande->etat = "livré";
+                    $commande->quantite_livre = $test;
+                    $commande->save();
+                    $livraison = Livraison::create($var);
 
-                }else if($commande->quantite_livre < $commande->quantite_commande){
+                    return response()->json([
+                        'message' => 'commande livré',
+                        'valeur' => $livraison
+
+                    ]);
+
+                }else if($test < (int)$commande->quantite_commande){
                     $commande->etat = "encours";
+                    $commande->quantite_livre = $test;
+                    $commande->save();
+
+                    $livraison = Livraison::create($var);
+                    return response()->json([
+                        'message' => 'commande encours',
+                        'valeur' => $livraison
+                    ]);
+                    
+                }else if($test > (int)$commande->quantite_commande){
+                    return response()->json([
+                        'valeur' => 'valeur trop grande !'
+                    ]);
 
                 }else{
-                    $commande->etat = "";
-
+                    return response()->json([
+                        'valeur' => 'erreur inatendu !'
+                    ]);
                 }
-                return response()->json([
-                    'message' => 'commande livré'
-                ]);
 
             }
-            $commande->save();
         }
 
-
-        return $livraison;
     }
-
     public function showLivraison()
     {
         $test = new Livraison();
