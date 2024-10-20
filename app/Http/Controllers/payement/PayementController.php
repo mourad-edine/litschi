@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\payement;
 
 use App\Http\Controllers\Controller;
+use App\Models\Commande;
 use App\Models\Livraison;
 use App\Models\Dechet;
 
@@ -38,6 +39,12 @@ class PayementController extends Controller
                 'pourcentage_dechet' => $request->pourcentage_dechet,
             ];
             Dechet::create($tab_dechet);
+
+            $commande = Commande::findorfail($livraison->commande_id);
+            if($commande){
+                $commande->montant_avance -= $request->avance_deduise;
+                $commande->save();
+            }
 
             return response()->json([
                 'message' => 'payement effectué avec succes !'

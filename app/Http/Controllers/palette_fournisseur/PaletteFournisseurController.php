@@ -11,24 +11,32 @@ class PaletteFournisseurController extends Controller
 {
     public function store_palette_fournisseur(Request $request)
     {
-        if ($request) {
-            $palette = [
-                'type' => $request->type,
-                'nombre_carton' => $request->nombre_carton,
-            ];
-            $insert = Palette::firstOrCreate($palette);
-            foreach($request->fournisseur as $fournisseur){
-                $insert = PaletteFournisseur::firstOrCreate([
-                    'palette_id' => $insert->id,
-                    'type' => $request->type,
-                    'nombre_carton' => $fournisseur['nombre_carton'],
-                    'fournsseur_id' => $fournisseur['fournisseur_id']
-                ]);
-            }
-           
-            return $insert;
-
+        $validatedData = $request->validate([
+            'type' => 'required|string',
+            'nombre_carton' => 'required|integer',
+            'fournisseur' => 'required|array',
+            'fournisseur.*.fournisseur_id' => 'required|integer',
+            'fournisseur.*.nombre_carton_fournisseur' => 'required|integer',
+        ]);
+    
+        // Insertion des données de la palette
+        $palette = Palette::FirstOrCreate([
+            'type' => $validatedData['type'],
+            'nombre_carton' => $validatedData['nombre_carton'],
+        ]);
+    
+        // Insertion des données des fournisseurs associés
+        foreach ($validatedData['fournisseur'] as $fournisseur) {
+            PaletteFournisseur::create([
+                'palette_id' => $palette->id,
+                'type' => $validatedData['type'],
+                'fournisseur_id' => $fournisseur['fournisseur_id'],
+                'nombre_carton' => $fournisseur['nombre_carton_fournisseur'],
+            ]);
         }
+    
+        return response()->json(['message' => 'Données insérées avec succès']);
+    
     }
 
     public function showPaletteFournisseur(){

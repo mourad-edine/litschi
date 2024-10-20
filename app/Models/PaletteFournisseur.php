@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class PaletteFournisseur extends Model
 {
 
-    protected $table = "palette_fournisseur";
+    protected $table = "palette_fournisseurs";
     protected $fillable = [
         'fournisseur_id',
         'palette_id',
