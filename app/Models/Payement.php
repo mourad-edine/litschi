@@ -16,8 +16,10 @@ class Payement extends Model
     ];
     use HasFactory;
 
-
+    public function livraison(){
+        return $this->belongsTo(Livraison::class ,'livraison_id');
+    }
     public function getPayement(){
-        return Payement::all();
+        return Payement::with('livraison')->get();
     }
 }

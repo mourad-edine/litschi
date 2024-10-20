@@ -27,100 +27,17 @@ class LivraisonController extends Controller
             if ($commande) {
                 if ($commande->quantite_commande < $commande->quantite_livre + $livraison->quantite) {
                     return response()->json([
-                        'message' => 'vous avez entré un grand nombre'
+                         'message' => 'vous avez entré un grand nombre'
                     ]);
                 } else if ($commande->quantite_commande == $commande->quantite_livre + $livraison->quantite) {
                     $commande->etat = "livré";
                     $commande->quantite_livre += $livraison->quantite;
-
-                    if ($commande->montant_avance >  $request->montant) {
-                        $commande->montant_avance -= $request->montant;
-                        $tab_pay = [
-                            'livraison_id' => $livraison->id,
-                            'montant' => $request->montant,
-                            'mode_payement' => $request->mode_payement,
-                            'date_payement' => $request->date_payement
-    
-                        ];
-                        Payement::create($tab_pay);
-                    } else if ($commande->montant_avance <  $request->montant) {
-                        $commande->montant_avance = 0;
-                        $tab_pay = [
-                            'livraison_id' => $livraison->id,
-                            'montant' => $request->montant,
-                            'mode_payement' => $request->mode_payement,
-                            'date_payement' => $request->date_payement
-    
-                        ];
-                        Payement::create($tab_pay);
-                    } else if ($commande->montant_avance ==  $request->montant) {
-                        $commande->montant_avance = 0;
-                        $tab_pay = [
-                            'livraison_id' => $livraison->id,
-                            'montant' => $request->montant,
-                            'mode_payement' => $request->mode_payement,
-                            'date_payement' => $request->date_payement
-    
-                        ];
-                        Payement::create($tab_pay);
-                    } else {
-                        return response()->json([
-                            'message' => 'une erreur est survenu'
-                        ]);
-                    }
-                    $tab_dechet = [
-                        'fournisseur_id' => $commande->fournisseur_id,
-                        'livraison_id' => $livraison->id,
-                        'pourcentage_dechet' => $request->pourcentage_dechet
-                    ];
-                    Dechet::create($tab_dechet);
                     return response()->json([
                         'message' => 'commande livré'
                     ]);
                 } else if ($commande->quantite_commande > $commande->quantite_livre + $livraison->quantite) {
                     $commande->quantite_livre += $livraison->quantite;
                     $commande->etat = "encours";
-                    if ($commande->montant_avance >  $request->montant) {
-                        $commande->montant_avance -= $request->montant;
-                        $tab_pay = [
-                            'livraison_id' => $livraison->id,
-                            'montant' => $request->montant,
-                            'mode_payement' => $request->mode_payement,
-                            'date_payement' => $request->date_payement
-    
-                        ];
-                        Payement::create($tab_pay);
-                    } else if ($commande->montant_avance <  $request->montant) {
-                        $commande->montant_avance = 0;
-                        $tab_pay = [
-                            'livraison_id' => $livraison->id,
-                            'montant' => $request->montant,
-                            'mode_payement' => $request->mode_payement,
-                            'date_payement' => $request->date_payement
-    
-                        ];
-                        Payement::create($tab_pay);
-                    } else if ($commande->montant_avance ==  $request->montant) {
-                        $commande->montant_avance = 0;
-                        $tab_pay = [
-                            'livraison_id' => $livraison->id,
-                            'montant' => $request->montant,
-                            'mode_payement' => $request->mode_payement,
-                            'date_payement' => $request->date_payement
-    
-                        ];
-                        Payement::create($tab_pay);
-                    } else {
-                        return response()->json([
-                            'message' => 'une erreur est survenu'
-                        ]);
-                    }
-                    $tab_dechet = [
-                        'fournisseur_id' => $commande->fournisseur_id,
-                        'livraison_id' => $livraison->id,
-                        'pourcentage_dechet' => $request->pourcentage_dechet
-                    ];
-                    Dechet::create($tab_dechet);
                 } else {
 
                     return response()->json([

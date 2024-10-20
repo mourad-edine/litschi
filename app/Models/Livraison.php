@@ -22,6 +22,10 @@ class Livraison extends Model
         return $this->belongsTo(Commande::class);
     }
 
+    public function payement(){
+        return $this->hasOne(Payement::class);
+    }
+
     public function fournisseur()
     {
         return $this->belongsTo(Fourniseur::class);
