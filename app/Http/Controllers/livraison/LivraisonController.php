@@ -25,34 +25,30 @@ class LivraisonController extends Controller
 
             $commande = Commande::findOrFail($request->commande_id);
             if ($commande) {
-                if ($commande->quantite_commande < $commande->quantite_livre + $livraison->quantite) {
-                    return response()->json([
-                         'message' => 'vous avez entré un grand nombre'
-                    ]);
-                } else if ($commande->quantite_commande == $commande->quantite_livre + $livraison->quantite) {
+                $commande->quantite_livre += $request->quantite;
+                if($commande->quantite_livre == $commande->quantite_commande){
                     $commande->etat = "livré";
-                    $commande->quantite_livre += $livraison->quantite;
-                    return response()->json([
-                        'message' => 'commande livré'
-                    ]);
-                } else if ($commande->quantite_commande > $commande->quantite_livre + $livraison->quantite) {
-                    $commande->quantite_livre += $livraison->quantite;
+
+                }else if($commande->quantite_livre < $commande->quantite_commande){
                     $commande->etat = "encours";
-                } else {
 
-                    return response()->json([
-                        'message' => 'une erreur est survenu'
-                    ]);
+                }else{
+                    $commande->etat = "";
+
                 }
-                
+                return response()->json([
+                    'message' => 'commande livré'
+                ]);
 
-
-                $commande->save();
             }
 
 
-            return $livraison;
+
+            $commande->save();
         }
+
+
+        return $livraison;
     }
 
     public function showLivraison()
