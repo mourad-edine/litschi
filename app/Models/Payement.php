@@ -18,11 +18,27 @@ class Payement extends Model
         'date_payement'
     ];
     use HasFactory;
-
     public function livraison(){
         return $this->belongsTo(Livraison::class ,'livraison_id');
     }
     public function getPayement(){
-        return Payement::with('livraison')->get();
+        $test = Payement::with('livraison')->get()->map(function($payement) {
+            return [
+                'payement_id' => $payement->id,
+                'livraison_id' => $payement->livraison_id,
+                'fournisseur' => Fourniseur::find($payement->fournisseur_id),
+                'montant_paye' =>  $payement->montant_paye,
+                'montant_deduise' => $payement->montant_deduise,
+                'mode_payement' => $payement->mode_payement,
+                'date_payement' => $payement->date_payement,
+                'livraison_id' => $payement->livraison->id,
+                'quantite' => $payement->livraison->quantite ,
+                'nombre_caissette' => $payement->livraison->nombre_caissette,
+                'date_livraison' => $payement->livraison->date_livraison,
+                // Ajoutez d'autres colonnes nécessaires ici
+            ];
+        });
+        
+        return $test;
     }
 }

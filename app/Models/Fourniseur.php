@@ -14,7 +14,7 @@ class Fourniseur extends Model
         'contact'
     ];
     use HasFactory;
-    
+
     public function avance()
     {
         return $this->hasOne(Avance::class , 'fournisseur_id');
