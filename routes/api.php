@@ -59,7 +59,7 @@ Route::get('/Show_lastIdCommande',[CommandeController::class , 'Show_lastIdComma
 //****************************detail*******************************/
 
 Route::get('/details_commande/{id}',[CommandeController::class , 'detailCommande'])->name('detail.commande');
-Route::get('/details_commande2/{id}',[CommandeController::class , 'detailCommande2'])->name('detail.commande');
+Route::get('/details_commande2/{id}',[CommandeController::class , 'detailCommande2'])->name('detail.commande2');
 
 Route::get('/details_livraison/{id}',[LivraisonController::class , 'detailLivraison'])->name('detail.livraison');
 Route::get('/details_fournisseur/{id}',[FournisseurController::class , 'detailfournisseur'])->name('detail.fournisseur');
