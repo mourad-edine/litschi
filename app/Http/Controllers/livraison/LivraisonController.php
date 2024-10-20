@@ -29,7 +29,7 @@ class LivraisonController extends Controller
                     $commande->etat = "livré";
                     $commande->quantite_livre = $test;
                     $commande->save();
-                    $livraison = Livraison::create($var);
+                    $livraison = Livraison::firstOrCreate($var);
 
                     return response()->json([
                         'message' => 'commande livré',
@@ -42,7 +42,7 @@ class LivraisonController extends Controller
                     $commande->quantite_livre = $test;
                     $commande->save();
 
-                    $livraison = Livraison::create($var);
+                    $livraison = Livraison::firstOrCreate($var);
                     return response()->json([
                         'message' => 'commande encours',
                         'valeur' => $livraison
