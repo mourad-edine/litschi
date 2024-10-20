@@ -24,7 +24,7 @@ class CommandeController extends Controller
             $insert = Commande::create($var);
             return response()->json([
                 'message' => 'Success',
-                'valeur' => $insert
+                'valeurs' => $insert
             ]);
         
         
