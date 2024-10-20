@@ -21,7 +21,7 @@ class CommandeController extends Controller
                 'date_commande' => $request->date
                 //etat ,id_commande
             ];
-            $insert = Commande::firstOrCreate($var);
+            $insert = Commande::create($var);
             return response()->json([
                 'message' => 'Success',
                 'valeurs' => $insert
