@@ -10,7 +10,10 @@ class Payement extends Model
     protected $table = 'payements';
     protected $fillable = [
         'livraison_id',
-        'montant',
+        'fournisseur_id',
+        'prix_jour',
+        'montant_paye',
+        'montant_deduise',
         'mode_payement',
         'date_payement'
     ];
