@@ -12,12 +12,12 @@ class CommandeController extends Controller
     {
        if ($request){
             $var = [
-                'fournisseur_id' => $request->fournisseur_id,
+                'fournisseur_id' => (int)$request->fournisseur_id,
                 'nom_sous_fournisseur' => $request->nom_sous_fournisseur,
                 'evenement_id' => $request->evenement_id,
-                'quantite_commande' => $request->quantite,
+                'quantite_commande' => (int)$request->quantite,
                 'etat' => "envoyé",
-                'montant_avance' => $request->montant_avance,
+                'montant_avance' => (int)$request->montant_avance,
                 'date_commande' => $request->date
                 //etat ,id_commande
             ];
@@ -30,12 +30,12 @@ class CommandeController extends Controller
         
         }else{
             $var = [
-                'fournisseur_id' => $request->fournisseur_id,
+                'fournisseur_id' => (int)$request->fournisseur_id,
                 'nom_sous_fournisseur' => $request->nom_sous_fournisseur,
                 'evenement_id' => $request->evenement_id,
-                'quantite_commande' => $request->quantite,
+                'quantite_commande' => (int)$request->quantite,
                 'etat' => "envoyé",
-                'montant_avance' => $request->montant_avance,
+                'montant_avance' => (int)$request->montant_avance,
                 'date_commande' => $request->date
                 //etat ,id_commande
             ];

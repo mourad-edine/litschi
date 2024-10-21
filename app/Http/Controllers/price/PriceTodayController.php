@@ -12,7 +12,7 @@ class PriceTodayController extends Controller
     {
         if ($request) {
             $var = [
-                'prix' => $request->prix,
+                'prix' => (int)$request->prix,
                 'date_today' => $request->date_today,
 
             ];

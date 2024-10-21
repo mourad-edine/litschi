@@ -17,8 +17,8 @@ class AvanceController extends Controller
         try {
             // Insérer les données dans la table avances
             $test = DB::table('avances')->insert([
-                'fournisseur_id' => $request->input('fournisseur_id'),
-                'montant_avance' => $request->input('montant_avance'),
+                'fournisseur_id' => (int)$request->input('fournisseur_id'),
+                'montant_avance' => (int)$request->input('montant_avance'),
                 'date_avance' => $request->input('date_avance'),
                 'mode_payement' => $request->input('mode_payement'),
                 'created_at' => now(),

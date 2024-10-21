@@ -16,11 +16,11 @@ class PayementController extends Controller
     {
         if ($request) {
             $tab_pay = [
-                'livraison_id' => $request->livraison_id,
-                'fournisseur_id' => $request->fournisseur_id,
-                'prix_jour' => $request->prix_jour,
-                'montant_paye' => $request->montant_paye,
-                'montant_deduise' => $request->avance_deduise,
+                'livraison_id' => (int)$request->livraison_id,
+                'fournisseur_id' => (int)$request->fournisseur_id,
+                'prix_jour' => (int)$request->prix_jour,
+                'montant_paye' => (int)$request->montant_paye,
+                'montant_deduise' => (int)$request->avance_deduise,
                 'date_payement' => $request->date_payement,
                 'mode_payement' => $request->mode_payement
 
@@ -35,14 +35,14 @@ class PayementController extends Controller
 
             $tab_dechet = [
                 'livraison_id' => $livraison->id,
-                'fournisseur_id' => $request->fournisseur_id,
-                'pourcentage_dechet' => $request->pourcentage_dechet,
+                'fournisseur_id' => (int)$request->fournisseur_id,
+                'pourcentage_dechet' => (int)$request->pourcentage_dechet,
             ];
             Dechet::create($tab_dechet);
 
             $commande = Commande::findorfail($livraison->commande_id);
             if($commande){
-                $commande->montant_avance -= $request->avance_deduise;
+                $commande->montant_avance -= (int)$request->avance_deduise;
                 $commande->save();
             }
 

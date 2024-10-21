@@ -13,16 +13,16 @@ class PaletteFournisseurController extends Controller
     {
         $validatedData = $request->validate([
             'type' => 'required|string',
-            'nombre_carton' => 'required|integer',
-            'fournisseur' => 'required|array',
-            'fournisseur.*.fournisseur_id' => 'required|integer',
-            'fournisseur.*.nombre_carton_fournisseur' => 'required|integer',
+            'nombre_carton' => 'required',
+            'fournisseur' => 'required',
+            'fournisseur.*.fournisseur_id' => 'required',
+            'fournisseur.*.nombre_carton_fournisseur' => 'required',
         ]);
     
         // Insertion des données de la palette
         $palette = Palette::FirstOrCreate([
             'type' => $validatedData['type'],
-            'nombre_carton' => $validatedData['nombre_carton'],
+            'nombre_carton' => (int)$request->nombre_carton,
         ]);
     
         // Insertion des données des fournisseurs associés
@@ -30,8 +30,8 @@ class PaletteFournisseurController extends Controller
             PaletteFournisseur::create([
                 'palette_id' => $palette->id,
                 'type' => $validatedData['type'],
-                'fournisseur_id' => $fournisseur['fournisseur_id'],
-                'nombre_carton' => $fournisseur['nombre_carton_fournisseur'],
+                'fournisseur_id' => (int)$fournisseur['fournisseur_id'],
+                'nombre_carton' => (int)$fournisseur['nombre_carton_fournisseur'],
             ]);
         }
     

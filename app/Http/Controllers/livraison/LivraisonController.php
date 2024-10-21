@@ -15,9 +15,9 @@ class LivraisonController extends Controller
     {
         if ($request) {
             $var = [
-                'commande_id' => $request->commande_id,
-                'quantite' => $request->quantite,
-                'nombre_caissette' => $request->nombre_caissette,
+                'commande_id' => (int)$request->commande_id,
+                'quantite' => (int)$request->quantite,
+                'nombre_caissette' => (int)$request->nombre_caissette,
                 'date_livraison' => $request->date_livraison,
                 'etat' => 'non payé'
             ];

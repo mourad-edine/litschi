@@ -32,8 +32,8 @@ class Payement extends Model
                 'mode_payement' => $payement->mode_payement,
                 'date_payement' => $payement->date_payement,
                 'livraison_id' => $payement->livraison->id,
-                'quantite' => $payement->livraison->quantite ,
-                'nombre_caissette' => $payement->livraison->nombre_caissette,
+                'livraison_quantite' => $payement->livraison->quantite ,
+                'livraison_nombre_caissette' => $payement->livraison->nombre_caissette,
                 'date_livraison' => $payement->livraison->date_livraison,
                 // Ajoutez d'autres colonnes nécessaires ici
             ];

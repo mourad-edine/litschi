@@ -14,7 +14,7 @@ class PaletteController extends Controller
         if ($request) {
             $palette = [
                 'type' => $request->type,
-                'nombre_carton' => $request->nombre_carton,
+                'nombre_carton' => (int)$request->nombre_carton,
             ];
             $insert = Palette::firstOrCreate($palette);
             return $insert;
