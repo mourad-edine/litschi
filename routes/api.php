@@ -76,10 +76,10 @@ Route::get('/details_palette_fournisseur/{id}',[PaletteFournisseurController::cl
 
 /*******suppression********************* */
 
-Route::get('/delete_livraison/{id}',[LivraisonController::class , 'deleteLivraison'])->name('delete.livraison');
-Route::get('/delete_fournisseur/{id}',[FournisseurController::class , 'deletefournisseur'])->name('delete.fournisseur');
-Route::get('/delete_dechet/{id}',[DechetController::class , 'deleteDechet'])->name('delete.dechet');
-Route::get('/delete_payement/{id}',[PayementController::class , 'deletePayement'])->name('delete.payement');
+Route::delete('/delete_livraison/{id}',[LivraisonController::class , 'deleteLivraison'])->name('delete.livraison');
+Route::delete('/delete_fournisseur/{id}',[FournisseurController::class , 'deletefournisseur'])->name('delete.fournisseur');
+Route::delete('/delete_dechet/{id}',[DechetController::class , 'deleteDechet'])->name('delete.dechet');
+Route::delete('/delete_payement/{id}',[PayementController::class , 'deletePayement'])->name('delete.payement');
 Route::delete('/delete_avance/{id}',[AvanceController::class , 'deleteAvance'])->name('delete.avance');
 Route::delete('/delete_commande/{id}',[CommandeController::class , 'deleteCommande'])->name('delete.commande');
 
