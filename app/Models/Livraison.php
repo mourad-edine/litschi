@@ -42,10 +42,10 @@ class Livraison extends Model
                 'commande_id' => $livraison->commande->id,
                 'fournisseur_id' => $livraison->commande->fournisseur->id,
                 'nom_fournisseur' => $livraison->commande->fournisseur->nom_fournisseur,
-                'nom_sous_fournisseur' => $livraison->commande->fournisseur->nom_sous_fournisseur,
-                // Ajoutez d'autres colonnes nécessaires ici
+                'nom_sous_fournisseur' => $livraison->commande->nom_sous_fournisseur,
             ];
         });
+        
         
         return $test;
     }
