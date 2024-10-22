@@ -30,6 +30,6 @@ class PaletteFournisseur extends Model
     }
 
     public function getPalettefournisseur(){
-        return PaletteFournisseur::all();
+        return PaletteFournisseur::with('fournisseur')->get();
     }
 }
