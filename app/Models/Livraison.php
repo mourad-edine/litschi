@@ -19,7 +19,14 @@ class Livraison extends Model
 
     public function commande()
     {
+        
         return $this->belongsTo(Commande::class);
+    }
+
+    public function dechet()
+    {
+        return $this->hasOne(Dechet::class);
+
     }
 
     public function payement(){

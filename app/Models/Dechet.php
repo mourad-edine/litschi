@@ -12,4 +12,16 @@ class Dechet extends Model
         'livraison_id',
         'pourcentage_dechet',
     ];
+
+    public function livraison(){
+        return $this->belongsTo(Livraison::class);
+    }
+
+    public function fournisseur(){
+        return $this->belongsTo(Fourniseur::class);
+    }
+
+    public function getDechet(){
+        return Dechet::with('fournisseur' , 'livraison')->get();
+    }
 }
