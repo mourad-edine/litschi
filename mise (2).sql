@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : dim. 20 oct. 2024 à 19:26
+-- Généré le : mar. 22 oct. 2024 à 12:55
 -- Version du serveur : 10.4.32-MariaDB
 -- Version de PHP : 8.2.12
 
@@ -96,7 +96,13 @@ CREATE TABLE `commandes` (
 INSERT INTO `commandes` (`id`, `fournisseur_id`, `nom_sous_fournisseur`, `quantite_commande`, `quantite_livre`, `montant_avance`, `etat`, `date_commande`, `created_at`, `updated_at`) VALUES
 (15, 1, NULL, 500, 430, 20000, 'encours', '2024-05-06', '2024-10-20 12:36:46', '2024-10-20 13:18:15'),
 (16, 1, NULL, 200, 0, 20000, 'envoyé', '2023-05-05', '2024-10-20 12:37:34', '2024-10-20 12:37:34'),
-(17, 2, NULL, 200, 0, 20000, 'envoyé', '2023-05-05', '2024-10-20 12:37:51', '2024-10-20 12:37:51');
+(17, 2, NULL, 200, 0, 20000, 'envoyé', '2023-05-05', '2024-10-20 12:37:51', '2024-10-20 12:37:51'),
+(18, 2, NULL, 200, 200, 0, 'livré', '2023-02-02', NULL, '2024-10-20 16:20:50'),
+(19, 3, NULL, 82, 0, 714752, 'envoyé', '2024-05-05', '2024-10-20 16:43:52', '2024-10-20 16:43:52'),
+(20, 6, NULL, 400, 400, 10000, 'livré', '2024-08-05', '2024-10-21 03:17:54', '2024-10-21 03:21:02'),
+(21, 6, NULL, 0, 0, 20000, 'envoyé', NULL, '2024-10-21 03:51:54', '2024-10-21 03:51:54'),
+(22, 6, NULL, 900, 0, 20000, 'envoyé', NULL, '2024-10-21 03:53:28', '2024-10-21 03:53:28'),
+(23, 6, 'badji', 900, 10, 20000, 'encours', NULL, '2024-10-22 04:59:47', '2024-10-22 05:43:16');
 
 -- --------------------------------------------------------
 
@@ -118,7 +124,13 @@ CREATE TABLE `dechets` (
 --
 
 INSERT INTO `dechets` (`id`, `fournisseur_id`, `livraison_id`, `pourcentage_dechet`, `created_at`, `updated_at`) VALUES
-(10, 1, 46, 50, '2024-10-20 14:19:47', '2024-10-20 14:19:47');
+(10, 1, 46, 50, '2024-10-20 14:19:47', '2024-10-20 14:19:47'),
+(11, 1, 47, 50, '2024-10-20 14:48:41', '2024-10-20 14:48:41'),
+(12, 1, 48, 40, '2024-10-20 14:50:30', '2024-10-20 14:50:30'),
+(13, 2, 50, 40, '2024-10-20 16:16:46', '2024-10-20 16:16:46'),
+(14, 2, 51, 40, '2024-10-20 16:18:57', '2024-10-20 16:18:57'),
+(15, 2, 52, 40, '2024-10-20 16:20:50', '2024-10-20 16:20:50'),
+(16, 6, 53, 40, '2024-10-21 03:21:02', '2024-10-21 03:21:02');
 
 -- --------------------------------------------------------
 
@@ -160,7 +172,8 @@ INSERT INTO `fournisseurs` (`id`, `nom_fournisseur`, `adresse`, `contact`, `crea
 (2, 'mario', 'francois', '0321354685', '2024-10-18 18:45:50', '2024-10-18 18:45:50'),
 (3, 'pascal', 'paris premier', '0215412512', '2024-10-20 04:37:31', '2024-10-20 04:37:31'),
 (4, 'mufasa', 'texas', '24525', '2024-10-20 05:01:16', '2024-10-20 05:01:16'),
-(5, 'frfre', 'francois', '0321354685', '2024-10-20 12:44:55', '2024-10-20 12:44:55');
+(5, 'frfre', 'francois', '0321354685', '2024-10-20 12:44:55', '2024-10-20 12:44:55'),
+(6, 'mourad', 'comores', '6768465', '2024-10-21 03:17:07', '2024-10-21 03:17:07');
 
 -- --------------------------------------------------------
 
@@ -220,9 +233,16 @@ CREATE TABLE `livraisons` (
 
 INSERT INTO `livraisons` (`id`, `commande_id`, `quantite`, `nombre_caissette`, `date_livraison`, `etat`, `created_at`, `updated_at`) VALUES
 (46, 15, 20, 500, '2023-02-02', 'payé', '2024-10-20 12:52:49', '2024-10-20 14:19:04'),
-(47, 15, 50, 200, '2023-02-02', 'non payé', '2024-10-20 12:55:32', '2024-10-20 12:55:32'),
-(48, 15, 300, 200, '2023-02-02', 'non payé', '2024-10-20 12:56:42', '2024-10-20 12:56:42'),
-(49, 15, 60, 200, '2023-02-02', 'non payé', '2024-10-20 13:18:15', '2024-10-20 13:18:15');
+(47, 15, 50, 200, '2023-02-02', 'payé', '2024-10-20 12:55:32', '2024-10-20 14:48:41'),
+(48, 15, 300, 200, '2023-02-02', 'payé', '2024-10-20 12:56:42', '2024-10-20 14:50:30'),
+(49, 15, 60, 200, '2023-02-02', 'non payé', '2024-10-20 13:18:15', '2024-10-20 13:18:15'),
+(50, 18, 60, 107, '2023-02-02', 'payé', '2024-10-20 16:15:23', '2024-10-20 16:16:46'),
+(51, 18, 50, 107, '2023-02-02', 'payé', '2024-10-20 16:17:58', '2024-10-20 16:18:57'),
+(52, 18, 90, 107, '2023-02-02', 'payé', '2024-10-20 16:20:35', '2024-10-20 16:20:50'),
+(53, 20, 90, 107, '2023-02-02', 'payé', '2024-10-21 03:18:40', '2024-10-21 03:21:02'),
+(54, 20, 200, 107, '2023-02-02', 'non payé', '2024-10-21 03:18:49', '2024-10-21 03:18:49'),
+(55, 20, 110, 107, '2023-02-02', 'non payé', '2024-10-21 03:19:13', '2024-10-21 03:19:13'),
+(56, 23, 10, 107, '2023-02-06', 'non payé', '2024-10-22 05:43:16', '2024-10-22 05:43:16');
 
 -- --------------------------------------------------------
 
@@ -271,6 +291,13 @@ CREATE TABLE `palettes` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Déchargement des données de la table `palettes`
+--
+
+INSERT INTO `palettes` (`id`, `type`, `nombre_carton`, `created_at`, `updated_at`) VALUES
+(3, '2kg', 15, '2024-10-20 15:58:23', '2024-10-20 15:58:23');
+
 -- --------------------------------------------------------
 
 --
@@ -286,6 +313,14 @@ CREATE TABLE `palette_fournisseurs` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Déchargement des données de la table `palette_fournisseurs`
+--
+
+INSERT INTO `palette_fournisseurs` (`id`, `fournisseur_id`, `palette_id`, `type`, `nombre_carton`, `created_at`, `updated_at`) VALUES
+(3, 1, 3, '2kg', 200, '2024-10-20 15:58:23', '2024-10-20 15:58:23'),
+(4, 2, 3, '2kg', 400, '2024-10-20 15:58:23', '2024-10-20 15:58:23');
 
 -- --------------------------------------------------------
 
@@ -324,7 +359,13 @@ CREATE TABLE `payements` (
 
 INSERT INTO `payements` (`id`, `livraison_id`, `fournisseur_id`, `montant_paye`, `montant_deduise`, `prix_jour`, `mode_payement`, `date_payement`, `created_at`, `updated_at`) VALUES
 (9, 46, 1, 100000, 5000, 1500, 'taptap send', '2023-02-05', '2024-10-20 14:19:04', '2024-10-20 14:19:04'),
-(10, 46, 1, 100000, 5000, 1500, 'taptap send', '2023-02-05', '2024-10-20 14:19:47', '2024-10-20 14:19:47');
+(10, 46, 1, 100000, 5000, 1500, 'taptap send', '2023-02-05', '2024-10-20 14:19:47', '2024-10-20 14:19:47'),
+(11, 47, 1, 100000, 5000, 1500, 'taptap send', '2023-02-05', '2024-10-20 14:48:41', '2024-10-20 14:48:41'),
+(12, 48, 1, 822425, 895, 1500, 'mvola', '2024-03-08', '2024-10-20 14:50:30', '2024-10-20 14:50:30'),
+(13, 50, 2, 80000, 9500, 1500, 'orange money', '2024-03-08', '2024-10-20 16:16:46', '2024-10-20 16:16:46'),
+(14, 51, 2, 80000, 800000, 1500, 'orange money', '2024-03-08', '2024-10-20 16:18:57', '2024-10-20 16:18:57'),
+(15, 52, 2, 80000, 190500, 1500, 'orange money', '2024-03-08', '2024-10-20 16:20:50', '2024-10-20 16:20:50'),
+(16, 53, 6, 80000, 10000, 1200, 'paypal', '2024-03-08', '2024-10-21 03:21:02', '2024-10-21 03:21:02');
 
 -- --------------------------------------------------------
 
@@ -371,6 +412,13 @@ CREATE TABLE `sessions` (
   `payload` longtext NOT NULL,
   `last_activity` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Déchargement des données de la table `sessions`
+--
+
+INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
+('kQARY6GfDV0WFRlodD1GKSOG7iP0Npflc6RPA0xw', NULL, '::1', 'PostmanRuntime/7.42.0', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiTVZVRXpQSWU5OGd2ampNMWVmdzdCeHltVHNhQWVJd2h0SThUVXhweSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mjg6Imh0dHA6Ly9sb2NhbGhvc3QvbWlzZS9wdWJsaWMiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1729590238);
 
 -- --------------------------------------------------------
 
@@ -422,6 +470,14 @@ CREATE TABLE `users` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Déchargement des données de la table `users`
+--
+
+INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
+(1, 'mourad', 'chams@gmail.com', NULL, '$2y$12$4AXpTmbzHzvZ1GjJvMxQ8e4CHWUk64vUogJ0NgOLOIpvZAU4JZrRe', NULL, NULL, '2024-10-22 06:26:58'),
+(2, 'edne', 'emai@gmail.com', NULL, '$2y$12$5ajdjuwD1iX6XRMbjNooP.tLMaGvvXpO3QNrtzhRv3VDSY5J3kzs6', NULL, '2024-10-22 06:45:11', '2024-10-22 06:45:11');
 
 --
 -- Index pour les tables déchargées
@@ -583,13 +639,13 @@ ALTER TABLE `avances`
 -- AUTO_INCREMENT pour la table `commandes`
 --
 ALTER TABLE `commandes`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT pour la table `dechets`
 --
 ALTER TABLE `dechets`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT pour la table `failed_jobs`
@@ -601,7 +657,7 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT pour la table `fournisseurs`
 --
 ALTER TABLE `fournisseurs`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT pour la table `jobs`
@@ -613,7 +669,7 @@ ALTER TABLE `jobs`
 -- AUTO_INCREMENT pour la table `livraisons`
 --
 ALTER TABLE `livraisons`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
 
 --
 -- AUTO_INCREMENT pour la table `migrations`
@@ -625,19 +681,19 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT pour la table `palettes`
 --
 ALTER TABLE `palettes`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT pour la table `palette_fournisseurs`
 --
 ALTER TABLE `palette_fournisseurs`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT pour la table `payements`
 --
 ALTER TABLE `payements`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT pour la table `personal_access_tokens`
@@ -667,7 +723,7 @@ ALTER TABLE `today_prices`
 -- AUTO_INCREMENT pour la table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Contraintes pour les tables déchargées
@@ -702,8 +758,8 @@ ALTER TABLE `livraisons`
 -- Contraintes pour la table `palette_fournisseurs`
 --
 ALTER TABLE `palette_fournisseurs`
-  ADD CONSTRAINT `palette_fournisseurs_fournisseur_id_foreign` FOREIGN KEY (`fournisseur_id`) REFERENCES `fournisseurs` (`id`),
-  ADD CONSTRAINT `palette_fournisseurs_palette_id_foreign` FOREIGN KEY (`palette_id`) REFERENCES `palettes` (`id`);
+  ADD CONSTRAINT `palette_fournisseurs_fournisseur_id_foreign` FOREIGN KEY (`fournisseur_id`) REFERENCES `fournisseurs` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `palette_fournisseurs_palette_id_foreign` FOREIGN KEY (`palette_id`) REFERENCES `palettes` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Contraintes pour la table `payements`
