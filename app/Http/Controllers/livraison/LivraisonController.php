@@ -55,7 +55,7 @@ class LivraisonController extends Controller
 
                 }else{
                     return response()->json([
-                        'valeur' => 'erreur inatendu !'
+                        'valeur' => 'erreur inatendu de votre part !'
                     ]);
                 }
 
