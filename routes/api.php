@@ -12,6 +12,7 @@ use App\Http\Controllers\palette_fournisseur\PaletteFournisseurController;
 use App\Http\Controllers\payement\PayementController;
 use App\Http\Controllers\price\PriceTodayController;
 use App\Http\Controllers\sous_fournisseur\SousFournisseurController;
+use App\Http\Controllers\User\UserController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -29,6 +30,8 @@ Route::post('/create_avance',[AvanceController::class , 'store_avance'])->name('
 //soit au traitement ou soit ici
 Route::post('/create_dechet',[DechetController::class , 'store_dechet'])->name('store.dechet');
 //
+Route::post('/login_user',[UserController::class , 'login'])->name('login.user');
+
 Route::post('/create_palette',[PaletteController::class , 'store_palette'])->name('store.palette');
 Route::post('/create_palette_fournisseur',[PaletteFournisseurController::class , 'store_palette_fournisseur'])->name('store.pfournisseur');
 Route::post('/create_price',[PriceTodayController::class , 'store_price'])->name('store.price');
@@ -83,3 +86,6 @@ Route::delete('/delete_avance/{id}',[AvanceController::class , 'deleteAvance'])-
 Route::get('/annuler_commande/{id}',[CommandeController::class , 'AnnulerCommande'])->name('annuler.commande');
 
 Route::get('/show_price',[PriceTodayController::class , 'Show_lastIdprice'])->name('show.lastIdprice');
+
+
+Route::post('/login_user',[UserController::class , 'login'])->name('login.user');
