@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -11,12 +12,15 @@ class UserController extends Controller
 {
     public function login(Request $request)
     {
-        $credentials = $request->only('name', 'password');
+        $credentials = [
+            'name' => $request->user ,
+            'password' => $request->pass
+        ];
         
         // Validation des champs
         $request->validate([
-            'name' => 'required',
-            'password' => 'required',
+            'user' => 'required',
+            'pass' => 'required',
         ]);
 
         // Tentative de connexion
@@ -31,5 +35,19 @@ class UserController extends Controller
         return response()->json([
             'result' => "not ok"
         ]);
+    }
+
+    public function store_user(Request $request){
+        if ($request) {
+            $var = [
+                'name' => $request->user,
+                'email' => $request->email,
+                'password' => $request->pass
+
+            ];
+            $insert = User::firstOrCreate($var);
+            return $insert;
+
+        }
     }
 }

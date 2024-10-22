@@ -31,6 +31,7 @@ Route::post('/create_avance',[AvanceController::class , 'store_avance'])->name('
 Route::post('/create_dechet',[DechetController::class , 'store_dechet'])->name('store.dechet');
 //
 Route::post('/login_user',[UserController::class , 'login'])->name('login.user');
+Route::post('/create_user',[UserController::class , 'store_user'])->name('store.user');
 
 Route::post('/create_palette',[PaletteController::class , 'store_palette'])->name('store.palette');
 Route::post('/create_palette_fournisseur',[PaletteFournisseurController::class , 'store_palette_fournisseur'])->name('store.pfournisseur');
