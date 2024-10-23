@@ -36,12 +36,14 @@ class PriceTodayController extends Controller
     {
         $fournisseur = Fourniseur::count();
         $livraison = Livraison::sum('quantite');
+        $commande = Commande::sum('quantite_commande');
         $dechet = Dechet::sum('pourcentage_dechet');
         $palette = Palette::count();
         $sous_fournisseur = Commande::whereNotNull('nom_sous_fournisseur')->count();
 
         return response()->json([
             'nombre_fournissseur' => $fournisseur,
+            'total_quantite_commande' => $commande,
             'nombre_livraison'  => $livraison,
             'nombre_dechet' => $dechet,
             'nombre_palette' => $palette,
