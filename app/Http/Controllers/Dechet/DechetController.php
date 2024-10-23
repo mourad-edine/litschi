@@ -14,7 +14,7 @@ class DechetController extends Controller
             $var = [
                 'nombre_dechet' => (int)$request->nombre_dechet,
             ];
-            $insert = Dechet::firstOrCreate($var);
+            $insert = Dechet::create($var);
             return $insert;
 
         }
