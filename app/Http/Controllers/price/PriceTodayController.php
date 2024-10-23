@@ -35,7 +35,7 @@ class PriceTodayController extends Controller
     public function compte()
     {
         $fournisseur = Fourniseur::count();
-        $livraison = Livraison::count();
+        $livraison = Livraison::sum('quantite');
         $dechet = Dechet::count();
         $palette = Palette::count();
         $sous_fournisseur = Commande::whereNotNull('nom_sous_fournisseur')->count();
