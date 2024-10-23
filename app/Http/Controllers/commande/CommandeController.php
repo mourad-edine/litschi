@@ -10,6 +10,8 @@ class CommandeController extends Controller
 {
     public function store_commande(Request $request)
     {
+        $valeur_sans_espace = str_replace(' ', '', $request->input('montant_avance'));
+        $montant = (int)$valeur_sans_espace;
        if ($request){
             $var = [
                 'fournisseur_id' => (int)$request->fournisseur_id,
@@ -17,7 +19,7 @@ class CommandeController extends Controller
                 'evenement_id' => $request->evenement_id,
                 'quantite_commande' => (int)$request->quantite,
                 'etat' => "envoyé",
-                'montant_avance' => (int)$request->montant_avance,
+                'montant_avance' => (int)$montant,
                 'date_commande' => $request->date
                 //etat ,id_commande
             ];
@@ -35,7 +37,7 @@ class CommandeController extends Controller
                 'evenement_id' => $request->evenement_id,
                 'quantite_commande' => (int)$request->quantite,
                 'etat' => "envoyé",
-                'montant_avance' => (int)$request->montant_avance,
+                'montant_avance' => (int)$montant,
                 'date_commande' => $request->date
                 //etat ,id_commande
             ];

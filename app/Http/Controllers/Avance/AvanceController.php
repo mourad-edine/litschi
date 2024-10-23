@@ -14,13 +14,11 @@ class AvanceController extends Controller
 {
     public function store_Avance(Request $request)
     {
-        $valeur_sans_espace = str_replace(' ', '', $request->input('montant_avance'));
-        $montant = (int)$valeur_sans_espace;
         try {
             // Insérer les données dans la table avances
             $test = DB::table('avances')->insert([
                 'fournisseur_id' => (int)$request->input('fournisseur_id'),
-                'montant_avance' => $montant,
+                'montant_avance' => (int)$request->input('montant_avance'),
                 'date_avance' => $request->input('date_avance'),
                 'mode_payement' => $request->input('mode_payement'),
                 'created_at' => now(),
