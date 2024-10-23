@@ -38,7 +38,7 @@ class FournisseurController extends Controller
             $valeur->delete();
         }
         return response()->json([
-            'message' => 'valeur supprimé avec succès'
+            'messages' => 'valeur supprimé avec succès'
         ]);
     }
 }
