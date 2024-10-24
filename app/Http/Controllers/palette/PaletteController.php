@@ -28,8 +28,8 @@ class PaletteController extends Controller
     public function suivi(){
         $quantite_commande = Commande::sum('quantite_commande');
         $nombre_caissette = Livraison::sum('nombre_caissette');
-        $total_kilo = (int)$quantite_commande * 1000;
-        $estimation_kilo = $total_kilo;
+        $total_kilo = (int)$nombre_caissette * 18;
+        $estimation_kilo = (int)$nombre_caissette * 20;
         $nombre_palettre = Palette::count('id');
         $quantite_dechet = Dechet::sum('pourcentage_dechet');
 
