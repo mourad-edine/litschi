@@ -89,5 +89,6 @@ Route::get('/annuler_commande/{id}',[CommandeController::class , 'AnnulerCommand
 Route::get('/show_price',[PriceTodayController::class , 'Show_lastIdprice'])->name('show.lastIdprice');
 Route::get('/show_compte',[PriceTodayController::class , 'compte'])->name('show.compte');
 
+Route::get('/show_suivi',[PaletteController::class , 'suivi'])->name('show.suivis');
 
 Route::post('/login_user',[UserController::class , 'login'])->name('login.user');
